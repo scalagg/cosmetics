@@ -1,0 +1,11 @@
+name: Cosmetics
+version: 1.0
+main: com.minexd.cosmetics.CosmeticsPlugin
+
+authors:
+  - joeleoli
+  - Scala
+
+depend:
+  - Cubed
+  - Lemon
