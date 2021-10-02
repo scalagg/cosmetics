@@ -57,8 +57,6 @@ class CategoriesMenu : Menu() {
 
                 desc.add("")
                 desc.addAll(TextSplitter.split(text = "Collect cool and crazy cosmetics to show off in lobbies by winning games, unlocking achievements, and opening crates."))
-                desc.add("")
-                desc.add("${ChatColor.YELLOW}https://store.minexd.com")
             }
         }
 

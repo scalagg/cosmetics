@@ -120,9 +120,9 @@ class PlayerTrack(val track: Track) {
         if (watchers.isNotEmpty() && clearedChanges.isNotEmpty()) {
             for (player in watchers) {
                 for (location in clearedChanges) {
-                    if (!location.isChunkLoaded) {
-                        continue
-                    }
+//                    if (!location.isChunkLoaded) {
+//                        continue
+//                    }
 
                     val block = location.block
                     player.sendBlockChange(location, block.type, block.data)
@@ -135,9 +135,9 @@ class PlayerTrack(val track: Track) {
         if (watchers.isNotEmpty()) {
             for (player in watchers) {
                 for (location in completedChanges.keys) {
-                    if (!location.isChunkLoaded) {
-                        continue
-                    }
+//                    if (!location.isChunkLoaded) {
+//                        continue
+//                    }
 
                     val block = location.block
                     player.sendBlockChange(location, block.type, block.data)
@@ -148,9 +148,9 @@ class PlayerTrack(val track: Track) {
 
     fun clearChanges(player: Player) {
         for (location in completedChanges.keys) {
-            if (!location.isChunkLoaded) {
-                continue
-            }
+//            if (!location.isChunkLoaded) {
+//                continue
+//            }
 
             val block = location.block
             player.sendBlockChange(location, block.type, block.data)

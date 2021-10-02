@@ -6,6 +6,9 @@ import com.mongodb.client.model.ReplaceOptions
 import com.minexd.cosmetics.Cosmetic
 import com.minexd.cosmetics.CosmeticsPlugin
 import com.minexd.cosmetics.event.PlayerToggleCosmeticEvent
+import com.mongodb.MongoClient
+import com.mongodb.MongoClientURI
+import gg.scala.lemon.Lemon
 import net.evilblock.cubed.Cubed
 import net.evilblock.cubed.serializers.Serializers
 import org.bson.Document
@@ -28,7 +31,12 @@ object ProfileHandler {
     private val profiles: MutableMap<UUID, Profile> = hashMapOf()
 
     fun initialLoad() {
-        mongoCollection = Cubed.instance.mongo.client
+        // will convert to data store sometime in the future
+        val mongoClient = MongoClient(
+            MongoClientURI(Lemon.instance.mongoConfig.uri)
+        )
+
+        mongoCollection = mongoClient
             .getDatabase(CosmeticsPlugin.instance.getStorageDatabase())
             .getCollection(CosmeticsPlugin.instance.getStorageCollection())
     }

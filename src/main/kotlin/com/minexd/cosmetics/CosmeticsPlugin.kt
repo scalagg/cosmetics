@@ -75,7 +75,8 @@ class CosmeticsPlugin : ExtendedJavaPlugin() {
 
         cubedCommandManager.registerCommand(EmoteCommand())
         cubedCommandManager.registerCommand(CosmeticsCommand())
-        cubedCommandManager.registerCommand(TracksCommand())
+
+//        cubedCommandManager.registerCommand(TracksCommand())
 
         server.pluginManager.registerEvents(ProfileLoadListeners, this)
         server.pluginManager.registerEvents(ProfileCosmeticListeners, this)

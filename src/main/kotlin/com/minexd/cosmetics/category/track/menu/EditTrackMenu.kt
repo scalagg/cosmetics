@@ -167,14 +167,14 @@ class EditTrackMenu(private val track: Track) : Menu() {
             if (clickType.isLeftClick) {
                 InputPrompt()
                         .withText("${ChatColor.GREEN}Please input a new name for the track.")
-                        .acceptInput { input ->
+                        .acceptInput { playerNew, input ->
                             track.displayName = ChatColor.translateAlternateColorCodes('&', input)
 
                             Tasks.async {
                                 TrackHandler.saveData()
                             }
 
-                            this@EditTrackMenu.openMenu(player)
+                            this@EditTrackMenu.openMenu(playerNew)
                         }
                         .start(player)
             }
@@ -238,14 +238,14 @@ class EditTrackMenu(private val track: Track) : Menu() {
             if (clickType.isLeftClick) {
                 InputPrompt()
                         .withText("${ChatColor.GREEN}Please input a new description.")
-                        .acceptInput { input ->
+                        .acceptInput { playerNew, input ->
                             track.desc = input
 
                             Tasks.async {
                                 TrackHandler.saveData()
                             }
 
-                            this@EditTrackMenu.openMenu(player)
+                            this@EditTrackMenu.openMenu(playerNew)
                         }
                         .start(player)
             }
