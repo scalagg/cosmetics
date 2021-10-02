@@ -10,18 +10,21 @@ import com.minexd.cosmetics.command.CosmeticsCommand
 import com.minexd.cosmetics.hook.Hook
 import com.minexd.cosmetics.hook.NoHook
 import com.minexd.cosmetics.listener.CosmeticsListeners
+import com.minexd.cosmetics.menu.CategoriesMenu
 import com.minexd.cosmetics.profile.ProfileHandler
 import com.minexd.cosmetics.profile.listener.ProfileCosmeticListeners
 import com.minexd.cosmetics.profile.listener.ProfileLoadListeners
 import com.minexd.cosmetics.profile.listener.ProfileTrackListeners
 import com.minexd.cosmetics.thread.CosmeticsThread
 import gg.scala.lemon.Lemon
+import me.lucko.helper.Events
 import me.lucko.helper.plugin.ExtendedJavaPlugin
 import net.evilblock.cubed.acf.ConditionFailedException
 import net.evilblock.cubed.command.manager.CubedCommandManager
 import net.evilblock.cubed.util.CC
 import org.bukkit.ChatColor
 import org.bukkit.event.Listener
+import org.bukkit.event.player.PlayerInteractEvent
 
 class CosmeticsPlugin : ExtendedJavaPlugin() {
 
@@ -82,6 +85,10 @@ class CosmeticsPlugin : ExtendedJavaPlugin() {
         server.pluginManager.registerEvents(ProfileCosmeticListeners, this)
         server.pluginManager.registerEvents(ProfileTrackListeners, this)
         server.pluginManager.registerEvents(CosmeticsListeners, this)
+
+        Events.subscribe(PlayerInteractEvent::class.java)
+            .filter { it.item != null && it.item.hasItemMeta() && it.item.itemMeta.displayName.contains("Cosmetics") }
+            .handler { CategoriesMenu().openMenu(it.player) }
 
         ProfileHandler.initialLoad()
         TrackHandler.initialLoad()

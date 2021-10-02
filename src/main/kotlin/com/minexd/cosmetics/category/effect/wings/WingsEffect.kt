@@ -17,6 +17,10 @@ abstract class WingsEffect(
 
     private var lastTick: Long = System.currentTimeMillis()
 
+    override fun getDescription(): String {
+        return "A fancy wing effect!"
+    }
+
     override fun tick(player: Player) {
         if (System.currentTimeMillis() - lastTick < 500L) {
             return
@@ -63,7 +67,7 @@ abstract class WingsEffect(
             particles.addAll(render(loc, loc2))
         }
     }
-    
+
     private fun render(loc: Location, loc2: Location): List<ParticleMeta> {
         return arrayListOf<ParticleMeta>().also { particles ->
             var loc2 = loc2
@@ -89,7 +93,7 @@ abstract class WingsEffect(
             particles.add(ParticleMeta(loc2.clone().add(loc2.direction.multiply(-1.2000000000000002)), particle, color1, 0.0F, 0))
             particles.add(ParticleMeta(loc2.clone().add(loc2.direction.multiply(-1.4000000000000001)), particle, color1, 0.0F, 0))
             particles.add(ParticleMeta(loc2.clone().add(loc2.direction.multiply(-1.6)), particle, color1, 0.0F, 0))
-    
+
             loc.add(0.0, 0.2, 0.0)
             loc2 = loc.clone()
 

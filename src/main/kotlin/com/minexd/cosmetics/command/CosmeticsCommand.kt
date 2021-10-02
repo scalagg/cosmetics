@@ -35,14 +35,6 @@ class CosmeticsCommand : BaseCommand() {
         CosmeticsPlugin.instance.reloadConfig()
     }
 
-    @Subcommand("wipe-db")
-    @CommandPermission("op")
-    @Description("Wipes the cosmetics database.")
-    fun onWipeDb(sender: ConsoleCommandSender) {
-        ProfileHandler.getCollection().drop()
-        sender.sendMessage("${ChatColor.GREEN}Wiped database!")
-    }
-
     @Subcommand("list")
     @CommandPermission("op")
     @Description("Lists all cosmetics and their permissions.")

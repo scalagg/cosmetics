@@ -8,7 +8,12 @@ import com.minexd.cosmetics.CosmeticsPlugin
 import com.minexd.cosmetics.event.PlayerToggleCosmeticEvent
 import com.mongodb.MongoClient
 import com.mongodb.MongoClientURI
+import com.solexgames.datastore.commons.connection.impl.mongo.UriMongoConnection
+import com.solexgames.datastore.commons.layer.impl.MongoStorageLayer
+import com.solexgames.datastore.commons.storage.impl.MongoStorageBuilder
 import gg.scala.lemon.Lemon
+import gg.scala.lemon.player.LemonPlayer
+import gg.scala.lemon.player.grant.Grant
 import net.evilblock.cubed.Cubed
 import net.evilblock.cubed.serializers.Serializers
 import org.bson.Document
@@ -17,13 +22,14 @@ import org.bson.json.JsonWriterSettings
 import org.bukkit.entity.Player
 import java.lang.reflect.Type
 import java.util.*
+import java.util.concurrent.CompletableFuture
 
 object ProfileHandler {
 
     /**
      * The mongo collection where profile documents are stored.
      */
-    private lateinit var mongoCollection: MongoCollection<Document>
+    lateinit var profileLayer: MongoStorageLayer<Profile>
 
     /**
      * The cache for loaded profiles.
@@ -31,18 +37,14 @@ object ProfileHandler {
     private val profiles: MutableMap<UUID, Profile> = hashMapOf()
 
     fun initialLoad() {
-        // will convert to data store sometime in the future
-        val mongoClient = MongoClient(
-            MongoClientURI(Lemon.instance.mongoConfig.uri)
-        )
+        val mongoConnection = UriMongoConnection(Lemon.instance.mongoConfig.uri)
+        val database = Lemon.instance.mongoConfig.database
 
-        mongoCollection = mongoClient
-            .getDatabase(CosmeticsPlugin.instance.getStorageDatabase())
-            .getCollection(CosmeticsPlugin.instance.getStorageCollection())
-    }
+        this.profileLayer = MongoStorageBuilder<Profile>()
+            .setDatabase(database).setCollection("cosmetics_players")
+            .setConnection(mongoConnection).setType(Profile::class.java).build()
 
-    fun getCollection(): MongoCollection<Document> {
-        return mongoCollection
+        this.profileLayer.supplyWithCustomGson(Serializers.gson)
     }
 
     fun getProfiles(): Collection<Profile> {
@@ -54,32 +56,25 @@ object ProfileHandler {
     }
 
     fun loadProfile(uuid: UUID) {
-        val profile = fetchProfile(uuid)
-        profiles[uuid] = profile
+        fetchProfile(uuid).thenAccept {
+            profiles[uuid] = it ?: Profile(uuid)
+        }
     }
 
-    fun fetchProfile(uuid: UUID): Profile {
-        val document = mongoCollection.find(Document("uuid", uuid.toString())).first() ?: return Profile(uuid)
-
-        return deserializeDocument(document).also {
-            it.lastMovement = System.currentTimeMillis()
-        }
+    fun fetchProfile(uuid: UUID): CompletableFuture<Profile?> {
+        return profileLayer.fetchEntryByKey(uuid.toString())
     }
 
     fun forgetProfile(profile: Profile) {
         profiles.remove(profile.uuid)
     }
 
-    fun saveProfile(profile: Profile) {
-        mongoCollection.replaceOne(Document("uuid", profile.uuid.toString()), Document.parse(Serializers.gson.toJson(profile)), ReplaceOptions().upsert(true))
-        profile.requiresSave = false
-    }
-
-    private val JSON_WRITER_SETTINGS = JsonWriterSettings.builder().outputMode(JsonMode.RELAXED).build()
-    private val PROFILE_TYPE: Type = object : TypeToken<Profile>() {}.type
-
-    private fun deserializeDocument(document: Document): Profile {
-        return Serializers.gson.fromJson(document.toJson(JSON_WRITER_SETTINGS), PROFILE_TYPE) as Profile
+    fun saveProfile(profile: Profile): CompletableFuture<Unit> {
+        return profileLayer.saveEntry(
+            profile.uuid.toString(), profile
+        ).thenApply {
+            profile.requiresSave = false
+        }
     }
 
     fun isCosmeticEnabled(player: Player, cosmetic: Cosmetic): Boolean {
