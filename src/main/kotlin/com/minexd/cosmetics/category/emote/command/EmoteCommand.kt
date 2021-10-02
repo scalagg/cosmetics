@@ -1,43 +1,26 @@
 package com.minexd.cosmetics.category.emote.command
 
 import com.minexd.cosmetics.category.emote.Emote
-import com.minexd.cosmetics.category.emote.EmotesBoxCosmetic
 import com.minexd.cosmetics.menu.EmoteBoxMenu
-import net.evilblock.cubed.command.Command
-import net.evilblock.cubed.command.data.parameter.Param
-import org.bukkit.ChatColor
+import net.evilblock.cubed.acf.BaseCommand
+import net.evilblock.cubed.acf.annotation.CommandAlias
+import net.evilblock.cubed.acf.annotation.Description
+import net.evilblock.cubed.acf.annotation.Syntax
 import org.bukkit.entity.Player
 
-object EmoteCommand {
+class EmoteCommand : BaseCommand() {
 
-    @Command(
-            names = ["emote", "emotes"],
-            description = "Open the Emotes GUI"
-    )
-    @JvmStatic
+    @CommandAlias("emote|emotes")
+    @Description("Open the Emotes GUI.")
     fun emotesMenu(player: Player) {
         EmoteBoxMenu().openMenu(player)
     }
 
-    @Command(
-        names = ["perform"]
-    )
-    @JvmStatic
-    fun perform(player: Player, @Param(name = "emote") emoteId: String) {
-        var matchingEmote: Emote? = null
-        for (emote in EmotesBoxCosmetic.emotes) {
-            if (emote.getId().equals(emoteId, ignoreCase = true)) {
-                matchingEmote = emote
-                break
-            }
-        }
-
-        if (matchingEmote == null) {
-            player.sendMessage("${ChatColor.RED}Invalid emote!")
-            return
-        }
-
-        matchingEmote.playEffect(player.eyeLocation.clone().add(player.location.direction))
+    @Syntax("<emote>")
+    @CommandAlias("perform")
+    @Description("Open the Emotes GUI.")
+    fun perform(player: Player, emote: Emote) {
+        emote.playEffect(player.eyeLocation.clone().add(player.location.direction))
     }
 
 }

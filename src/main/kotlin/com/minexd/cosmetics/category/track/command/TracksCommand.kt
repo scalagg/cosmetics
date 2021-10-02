@@ -1,18 +1,25 @@
 package com.minexd.cosmetics.category.track.command
 
+import com.minexd.cosmetics.category.track.menu.TrackEditorMenu
 import com.minexd.cosmetics.category.track.menu.TracksMenu
-import net.evilblock.cubed.command.Command
+import com.minexd.cosmetics.util.Permissions
+import net.evilblock.cubed.acf.BaseCommand
+import net.evilblock.cubed.acf.annotation.*
 import org.bukkit.entity.Player
 
-object TracksCommand {
+@CommandAlias("track|tracks")
+class TracksCommand : BaseCommand() {
 
-    @Command(
-            names = ["tracks", "track"],
-            description = "Open the Tracks GUI"
-    )
-    @JvmStatic
+    @Default
     fun execute(player: Player) {
         TracksMenu().openMenu(player)
+    }
+
+    @Subcommand("editor|edit")
+    @Description("Opens the tracks editor.")
+    @CommandPermission(Permissions.TRACKS_EDITOR)
+    fun onEditor(player: Player) {
+        TrackEditorMenu().openMenu(player)
     }
 
 }
