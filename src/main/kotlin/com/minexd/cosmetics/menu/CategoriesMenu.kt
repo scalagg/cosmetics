@@ -52,7 +52,7 @@ class CategoriesMenu : Menu() {
                 desc.add(buildString {
                     append("${ChatColor.GRAY}Collected: ")
                     append("${ChatColor.GREEN}${Numbers.format(collected)}")
-                    append("${ChatColor.WHITE}/${Numbers.format(total)}")
+                    append("${ChatColor.GRAY}/${CC.WHITE}${Numbers.format(total)}")
                 })
 
                 desc.add("")

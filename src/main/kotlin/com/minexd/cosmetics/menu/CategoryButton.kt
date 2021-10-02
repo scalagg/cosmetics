@@ -5,6 +5,7 @@ import com.minexd.cosmetics.category.EmotesCategory
 import com.minexd.cosmetics.category.TracksCategory
 import com.minexd.cosmetics.category.track.menu.TracksMenu
 import net.evilblock.cubed.menu.Button
+import net.evilblock.cubed.util.CC
 import net.evilblock.cubed.util.bukkit.ItemBuilder
 import net.evilblock.cubed.util.math.Numbers
 import org.bukkit.ChatColor
@@ -17,7 +18,7 @@ import org.bukkit.inventory.ItemStack
 class CategoryButton(private val category: CosmeticCategory) : Button() {
 
     override fun getName(player: Player): String {
-        return "${ChatColor.YELLOW}${ChatColor.BOLD}${category.getName()}"
+        return "${CC.B_PRI}${category.getName()}"
     }
 
     override fun getDescription(player: Player): List<String> {
@@ -31,12 +32,12 @@ class CategoryButton(private val category: CosmeticCategory) : Button() {
             lore.add(buildString {
                 append("${ChatColor.GRAY}Unlocked: ")
                 append("${ChatColor.GREEN}${Numbers.format(unlocked)}")
-                append("${ChatColor.WHITE}/${Numbers.format(total)}")
+                append("${ChatColor.GRAY}/${CC.WHITE}${Numbers.format(total)}")
             })
 
             lore.add("")
             lore.add("${ChatColor.YELLOW}Click to browse all")
-            lore.add("${ChatColor.YELLOW}${category.getPluralName()}.")
+            lore.add("${ChatColor.GREEN}${category.getPluralName()}${CC.YELLOW}.")
         }
     }
 
