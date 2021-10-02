@@ -25,14 +25,18 @@ class CategoryButton(private val category: CosmeticCategory) : Button() {
             val unlocked = category.getCosmetics().count { player.hasPermission(it.getPermission()) }
             val total = category.getCosmetics().size
 
+            lore.addAll(category.getDescription())
+            lore.add("")
+
             lore.add(buildString {
                 append("${ChatColor.GRAY}Unlocked: ")
                 append("${ChatColor.GREEN}${Numbers.format(unlocked)}")
-                append("${ChatColor.GRAY}/${Numbers.format(total)}")
+                append("${ChatColor.WHITE}/${Numbers.format(total)}")
             })
 
             lore.add("")
-            lore.add("${ChatColor.YELLOW}Click to browse all ${category.getPluralName()}")
+            lore.add("${ChatColor.YELLOW}Click to browse all")
+            lore.add("${ChatColor.YELLOW}${category.getPluralName()}.")
         }
     }
 

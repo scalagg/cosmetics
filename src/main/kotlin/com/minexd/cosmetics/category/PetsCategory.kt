@@ -2,6 +2,7 @@ package com.minexd.cosmetics.category
 
 import com.minexd.cosmetics.Cosmetic
 import com.minexd.cosmetics.CosmeticCategory
+import net.evilblock.cubed.util.CC
 import net.evilblock.cubed.util.bukkit.ItemBuilder
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
@@ -18,6 +19,13 @@ object PetsCategory : CosmeticCategory {
 
     override fun getIcon(): ItemStack {
         return ItemBuilder.of(Material.DIAMOND_BARDING).build()
+    }
+
+    override fun getDescription(): List<String> {
+        return listOf(
+            "${CC.GRAY}Get yourself an awesome",
+            "${CC.GRAY}pet that follows you around!"
+        )
     }
 
     override fun getCosmetics(): Collection<Cosmetic> {

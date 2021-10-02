@@ -5,6 +5,7 @@ import com.minexd.cosmetics.CosmeticsPlugin
 import net.evilblock.cubed.menu.Button
 import net.evilblock.cubed.menu.buttons.BackButton
 import net.evilblock.cubed.menu.pagination.PaginatedMenu
+import net.evilblock.cubed.util.bukkit.Constants
 import net.evilblock.cubed.util.bukkit.Tasks
 import org.bukkit.ChatColor
 import org.bukkit.entity.Player
@@ -24,7 +25,7 @@ class CosmeticsMenu(private val category: CosmeticCategory) : PaginatedMenu() {
     }
 
     override fun getPrePaginatedTitle(player: Player): String {
-        return ChatColor.stripColor(category.getName()) // too lazy to go to each cosmetic and remove color lol
+        return "Cosmetics ${Constants.DOUBLE_ARROW_RIGHT} ${ChatColor.stripColor(category.getName())}" // too lazy to go to each cosmetic and remove color lol
     }
 
     override fun getGlobalButtons(player: Player): Map<Int, Button> {

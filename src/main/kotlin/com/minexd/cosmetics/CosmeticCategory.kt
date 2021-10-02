@@ -11,6 +11,8 @@ interface CosmeticCategory {
 
     fun getPluralName(): String
 
+    fun getDescription(): List<String>
+
     fun getCosmetics(): Collection<Cosmetic>
 
     fun getAccessibleCosmetics(player: Player): List<Cosmetic> {

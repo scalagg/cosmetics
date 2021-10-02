@@ -16,6 +16,10 @@ object TracksCategory : CosmeticCategory {
         return "tracks"
     }
 
+    override fun getDescription(): List<String> {
+        return listOf()
+    }
+
     override fun getIcon(): ItemStack {
         return ItemStack(Material.RAILS)
     }

@@ -3,6 +3,7 @@ package com.minexd.cosmetics.category
 import com.minexd.cosmetics.Cosmetic
 import com.minexd.cosmetics.CosmeticCategory
 import com.minexd.cosmetics.category.emote.EmotesBoxCosmetic
+import net.evilblock.cubed.util.CC
 import net.evilblock.cubed.util.bukkit.ItemBuilder
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
@@ -19,6 +20,13 @@ object EmotesCategory : CosmeticCategory {
 
     override fun getPluralName(): String {
         return "emotes"
+    }
+
+    override fun getDescription(): List<String> {
+        return listOf(
+            "${CC.GRAY}Perform emotes in front",
+            "${CC.GRAY}of other players!"
+        )
     }
 
     override fun getIcon(): ItemStack {
