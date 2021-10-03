@@ -87,7 +87,7 @@ class CosmeticsPlugin : ExtendedJavaPlugin() {
         server.pluginManager.registerEvents(CosmeticsListeners, this)
 
         Events.subscribe(PlayerInteractEvent::class.java)
-            .filter { it.item != null && it.item.hasItemMeta() && it.item.itemMeta.displayName.contains("Cosmetics") }
+            .filter { it.item != null && it.action.name.contains("RIGHT") && it.item.hasItemMeta() && it.item.itemMeta.displayName.contains("Cosmetics") }
             .handler { CategoriesMenu().openMenu(it.player) }
 
         ProfileHandler.initialLoad()
