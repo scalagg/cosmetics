@@ -31,7 +31,7 @@ class CategoriesMenu : Menu() {
             buttons[13] = CategoryButton(PetsCategory)
             buttons[14] = CategoryButton(EffectsCategory)
             buttons[15] = CategoryButton(EmotesCategory)
-//            buttons[156] = CategoryButton(TracksCategory)
+            buttons[16] = CategoryButton(TracksCategory)
         }
     }
 
