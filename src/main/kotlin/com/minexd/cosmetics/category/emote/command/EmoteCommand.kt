@@ -1,7 +1,7 @@
 package com.minexd.cosmetics.category.emote.command
 
 import com.minexd.cosmetics.category.emote.Emote
-import com.minexd.cosmetics.menu.EmoteBoxMenu
+import com.minexd.cosmetics.category.emote.menu.EmoteBoxMenu
 import net.evilblock.cubed.acf.BaseCommand
 import net.evilblock.cubed.acf.annotation.CommandAlias
 import net.evilblock.cubed.acf.annotation.Description

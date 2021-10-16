@@ -1,6 +1,7 @@
-package com.minexd.cosmetics.menu
+package com.minexd.cosmetics.category.emote.menu
 
 import com.minexd.cosmetics.category.emote.EmotesBoxCosmetic
+import com.minexd.cosmetics.menu.CategoriesMenu
 import net.evilblock.cubed.menu.Button
 import net.evilblock.cubed.menu.Menu
 import net.evilblock.cubed.menu.buttons.BackButton

@@ -1,4 +1,4 @@
-package com.minexd.cosmetics.menu
+package com.minexd.cosmetics.category.emote.menu
 
 import com.minexd.cosmetics.category.emote.Emote
 import net.evilblock.cubed.menu.Button

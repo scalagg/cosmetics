@@ -3,6 +3,7 @@ package com.minexd.cosmetics.menu
 import com.minexd.cosmetics.CosmeticCategory
 import com.minexd.cosmetics.category.EmotesCategory
 import com.minexd.cosmetics.category.TracksCategory
+import com.minexd.cosmetics.category.emote.menu.EmoteBoxMenu
 import com.minexd.cosmetics.category.track.menu.TracksMenu
 import net.evilblock.cubed.menu.Button
 import net.evilblock.cubed.util.CC

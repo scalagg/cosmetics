@@ -4,7 +4,7 @@ import com.minexd.cosmetics.Cosmetic
 import com.minexd.cosmetics.CosmeticCategory
 import com.minexd.cosmetics.category.EmotesCategory
 import com.minexd.cosmetics.category.emote.impl.HeartEmote
-import com.minexd.cosmetics.menu.EmoteBoxMenu
+import com.minexd.cosmetics.category.emote.menu.EmoteBoxMenu
 import net.evilblock.cubed.util.bukkit.ItemUtils
 import org.bukkit.Material
 import org.bukkit.entity.Player

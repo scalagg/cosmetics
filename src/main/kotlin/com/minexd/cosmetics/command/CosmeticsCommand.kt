@@ -22,7 +22,6 @@ class CosmeticsCommand : BaseCommand() {
 
     @Default
     @HelpCommand
-    @Syntax("[help]")
     @CommandPermission("op")
     fun onHelp(help: CommandHelp) {
         help.showHelp()
