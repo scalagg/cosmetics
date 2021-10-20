@@ -2,6 +2,7 @@ package com.minexd.cosmetics.category
 
 import com.minexd.cosmetics.Cosmetic
 import com.minexd.cosmetics.CosmeticCategory
+import com.minexd.cosmetics.category.outfit.AstronautOutfit
 import com.minexd.cosmetics.category.outfit.RainbowOutfit
 import net.evilblock.cubed.util.CC
 import net.evilblock.cubed.util.bukkit.ItemBuilder
@@ -10,8 +11,8 @@ import org.bukkit.inventory.ItemStack
 
 object OutfitsCategory : CosmeticCategory {
 
-    private val cosmetics = arrayListOf(
-        RainbowOutfit()
+    private val cosmetics = listOf<Cosmetic>(
+        RainbowOutfit(), AstronautOutfit()
     )
 
     override fun getIcon(): ItemStack {

@@ -37,8 +37,7 @@ class CategoryButton(private val category: CosmeticCategory) : Button() {
             })
 
             lore.add("")
-            lore.add("${ChatColor.YELLOW}Click to browse all")
-            lore.add("${ChatColor.GREEN}${category.getPluralName()}${CC.YELLOW}.")
+            lore.add("${ChatColor.YELLOW}Click to browse ${ChatColor.GREEN}${category.getPluralName()}${CC.YELLOW}.")
         }
     }
 

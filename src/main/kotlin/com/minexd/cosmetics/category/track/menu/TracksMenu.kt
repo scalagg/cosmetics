@@ -9,7 +9,9 @@ import com.minexd.cosmetics.profile.ProfileHandler
 import net.evilblock.cubed.menu.Button
 import net.evilblock.cubed.menu.buttons.BackButton
 import net.evilblock.cubed.menu.pagination.PaginatedMenu
+import net.evilblock.cubed.util.CC
 import net.evilblock.cubed.util.bukkit.enchantment.GlowEnchantment
+import net.evilblock.cubed.util.text.TextSplitter
 import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -53,7 +55,8 @@ class TracksMenu : PaginatedMenu() {
         return BUTTON_SLOTS
     }
 
-    override fun getPageButtonSlots(): Pair<Int, Int>? {
+    override fun getPageButtonSlots(): Pair<Int, Int>
+    {
         return Pair(48, 50)
     }
 
@@ -68,13 +71,12 @@ class TracksMenu : PaginatedMenu() {
 
         override fun getDescription(player: Player): List<String> {
             return arrayListOf<String>().also { desc ->
-                if (track.blockTypes.isEmpty()) {
-                    desc.add("${ChatColor.GRAY}Has no blocks")
-                } else {
-                    for (blockType in track.blockTypes) {
-                        desc.add("${ChatColor.GRAY}- ${blockType.blockName()}")
-                    }
-                }
+                desc.addAll(
+                    TextSplitter.split(
+                        linePrefix = CC.GRAY,
+                        text = track.getDescription()
+                    )
+                )
 
                 desc.add("")
 
