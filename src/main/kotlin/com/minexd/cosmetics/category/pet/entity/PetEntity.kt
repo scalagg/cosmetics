@@ -10,6 +10,9 @@ import org.bukkit.Location
  */
 class PetEntity(val pet: Pet, location: Location) : Entity(location) {
 
+    // dont use cubed entity (no use in this)
+    // just use the normal way of spawning entities
+
     override fun getTypeName(): String {
         return "Pet"
     }

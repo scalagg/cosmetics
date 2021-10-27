@@ -45,7 +45,7 @@ class CosmeticButton(private val cosmetic: Cosmetic) : Button() {
     override fun getDescription(player: Player): List<String> {
         return arrayListOf<String>().also { desc ->
             if (player.isOp || player.hasPermission("cosmetics.admin")) {
-                desc.add("${ChatColor.GRAY}(${cosmetic.getPermission()})")
+                desc.add("${ChatColor.DARK_GRAY}(${cosmetic.getPermission()})")
             }
 
             desc.add("")
@@ -57,9 +57,9 @@ class CosmeticButton(private val cosmetic: Cosmetic) : Button() {
                 val profile = ProfileHandler.getProfile(player)
                 if (profile != null) {
                     if (profile.isCosmeticEnabled(cosmetic)) {
-                        desc.add("${ChatColor.YELLOW}Click to ${ChatColor.RED}disable ${ChatColor.YELLOW}this cosmetic")
+                        desc.add("${ChatColor.YELLOW}Click to ${ChatColor.RED}disable ${ChatColor.YELLOW}this cosmetic.")
                     } else {
-                        desc.add("${ChatColor.YELLOW}Click to ${ChatColor.GREEN}enable ${ChatColor.YELLOW}this cosmetic")
+                        desc.add("${ChatColor.YELLOW}Click to ${ChatColor.GREEN}enable ${ChatColor.YELLOW}this cosmetic.")
                     }
                 }
             } else {

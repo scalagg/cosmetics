@@ -19,10 +19,6 @@ object DogPet : Pet {
         return "Dog"
     }
 
-    override fun getDescription(): List<String> {
-        return arrayListOf("${ChatColor.GOLD}Have a ${ChatColor.RED}${getDisplayName()} ${ChatColor.GOLD}as your pet.")
-    }
-
     override fun getIcon(): ItemStack {
         return ItemStack(Material.BONE)
     }
