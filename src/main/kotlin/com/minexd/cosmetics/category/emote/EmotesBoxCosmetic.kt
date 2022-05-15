@@ -1,7 +1,7 @@
 package com.minexd.cosmetics.category.emote
 
-import com.minexd.cosmetics.Cosmetic
-import com.minexd.cosmetics.CosmeticCategory
+import com.minexd.cosmetics.cosmetic.Cosmetic
+import com.minexd.cosmetics.cosmetic.category.CosmeticCategory
 import com.minexd.cosmetics.category.EmotesCategory
 import com.minexd.cosmetics.category.emote.impl.HeartEmote
 import com.minexd.cosmetics.category.emote.menu.EmoteBoxMenu
@@ -17,7 +17,8 @@ object EmotesBoxCosmetic : Cosmetic() {
 
     val emotes = arrayListOf<Emote>(HeartEmote)
 
-    override fun getCategory(): CosmeticCategory {
+    override fun getCategory(): CosmeticCategory
+    {
         return EmotesCategory
     }
 

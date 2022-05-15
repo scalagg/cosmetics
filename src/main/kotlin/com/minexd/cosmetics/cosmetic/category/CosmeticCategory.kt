@@ -1,5 +1,6 @@
-package com.minexd.cosmetics
+package com.minexd.cosmetics.cosmetic.category
 
+import com.minexd.cosmetics.cosmetic.Cosmetic
 import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 

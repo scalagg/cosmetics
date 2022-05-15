@@ -1,7 +1,7 @@
 package com.minexd.cosmetics.category.effect
 
-import com.minexd.cosmetics.CosmeticCategory
-import com.minexd.cosmetics.TickableCosmetic
+import com.minexd.cosmetics.cosmetic.category.CosmeticCategory
+import com.minexd.cosmetics.cosmetic.TickableCosmetic
 import com.minexd.cosmetics.category.EffectsCategory
 import org.bukkit.Material
 import org.bukkit.entity.Player
@@ -10,7 +10,8 @@ import org.bukkit.inventory.ItemStack
 
 object AlienEffect : TickableCosmetic(), Listener {
 
-    override fun getCategory(): CosmeticCategory {
+    override fun getCategory(): CosmeticCategory
+    {
         return EffectsCategory
     }
 

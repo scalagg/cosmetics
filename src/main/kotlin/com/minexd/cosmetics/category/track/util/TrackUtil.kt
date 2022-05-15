@@ -150,45 +150,6 @@ object TrackUtil {
         switchable[Material.COAL_BLOCK] = 0
         switchable[Material.PACKED_ICE] = 0
         switchable[Material.RED_SANDSTONE] = 2
-//        switchable[Material.PURPUR_BLOCK] = 0
-//        switchable[Material.PURPUR_PILLAR] = 0
-//        switchable[Material.NETHER_WART_BLOCK] = 0
-//        switchable[Material.RED_NETHER_BRICK] = 0
-//        switchable[Material.BONE_BLOCK] = 0
-//        switchable[Material.WHITE_SHULKER_BOX] = 0
-//        switchable[Material.ORANGE_SHULKER_BOX] = 0
-//        switchable[Material.MAGENTA_SHULKER_BOX] = 0
-//        switchable[Material.LIGHT_BLUE_SHULKER_BOX] = 0
-//        switchable[Material.YELLOW_SHULKER_BOX] = 0
-//        switchable[Material.LIME_SHULKER_BOX] = 0
-//        switchable[Material.PINK_SHULKER_BOX] = 0
-//        switchable[Material.GRAY_SHULKER_BOX] = 0
-//        switchable[Material.SILVER_SHULKER_BOX] = 0
-//        switchable[Material.CYAN_SHULKER_BOX] = 0
-//        switchable[Material.PURPLE_SHULKER_BOX] = 0
-//        switchable[Material.BLUE_SHULKER_BOX] = 0
-//        switchable[Material.BROWN_SHULKER_BOX] = 0
-//        switchable[Material.GREEN_SHULKER_BOX] = 0
-//        switchable[Material.RED_SHULKER_BOX] = 0
-//        switchable[Material.BLACK_SHULKER_BOX] = 0
-//        switchable[Material.WHITE_GLAZED_TERRACOTTA] = 0
-//        switchable[Material.ORANGE_GLAZED_TERRACOTTA] = 0
-//        switchable[Material.MAGENTA_GLAZED_TERRACOTTA] = 0
-//        switchable[Material.LIGHT_BLUE_GLAZED_TERRACOTTA] = 0
-//        switchable[Material.YELLOW_GLAZED_TERRACOTTA] = 0
-//        switchable[Material.LIME_GLAZED_TERRACOTTA] = 0
-//        switchable[Material.PINK_GLAZED_TERRACOTTA] = 0
-//        switchable[Material.GRAY_GLAZED_TERRACOTTA] = 0
-//        switchable[Material.SILVER_GLAZED_TERRACOTTA] = 0
-//        switchable[Material.CYAN_GLAZED_TERRACOTTA] = 0
-//        switchable[Material.PURPLE_GLAZED_TERRACOTTA] = 0
-//        switchable[Material.BLUE_GLAZED_TERRACOTTA] = 0
-//        switchable[Material.BROWN_GLAZED_TERRACOTTA] = 0
-//        switchable[Material.GREEN_GLAZED_TERRACOTTA] = 0
-//        switchable[Material.RED_GLAZED_TERRACOTTA] = 0
-//        switchable[Material.BLACK_GLAZED_TERRACOTTA] = 0
-//        switchable[Material.CONCRETE] = 15
-//        switchable[Material.CONCRETE_POWDER] = 15
     }
 
 }

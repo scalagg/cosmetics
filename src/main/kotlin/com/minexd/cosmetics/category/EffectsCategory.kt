@@ -1,7 +1,7 @@
 package com.minexd.cosmetics.category
 
-import com.minexd.cosmetics.Cosmetic
-import com.minexd.cosmetics.CosmeticCategory
+import com.minexd.cosmetics.cosmetic.Cosmetic
+import com.minexd.cosmetics.cosmetic.category.CosmeticCategory
 import com.minexd.cosmetics.category.effect.BubblesEffect
 import com.minexd.cosmetics.category.effect.trail.FlameRingsEffect
 import com.minexd.cosmetics.category.effect.trail.LavaRingsEffect
@@ -13,7 +13,8 @@ import net.evilblock.cubed.util.bukkit.ItemBuilder
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 
-object EffectsCategory : CosmeticCategory {
+object EffectsCategory : CosmeticCategory
+{
 
     override fun getName(): String {
         return "Effects"

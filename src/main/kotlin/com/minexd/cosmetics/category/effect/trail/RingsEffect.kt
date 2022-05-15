@@ -1,6 +1,6 @@
 package com.minexd.cosmetics.category.effect.trail
 
-import com.minexd.cosmetics.TickableCosmetic
+import com.minexd.cosmetics.cosmetic.TickableCosmetic
 import net.evilblock.cubed.util.nms.particle.ParticleMeta
 import net.evilblock.cubed.util.nms.particle.ParticleUtil
 import org.bukkit.entity.Player

@@ -1,32 +1,41 @@
 package com.minexd.cosmetics.profile.listener
 
 import com.minexd.cosmetics.CosmeticsPlugin
-import com.minexd.cosmetics.TickableCosmetic
+import com.minexd.cosmetics.cosmetic.TickableCosmetic
 import com.minexd.cosmetics.profile.ProfileHandler
+import gg.scala.commons.annotations.Listeners
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
 import org.bukkit.event.player.AsyncPlayerPreLoginEvent
 import org.bukkit.event.player.PlayerJoinEvent
 import org.bukkit.event.player.PlayerQuitEvent
 
-object ProfileLoadListeners : Listener {
-
+@Listeners
+object ProfileLoadListeners : Listener
+{
     @EventHandler
-    fun onAsyncPlayerPreLoginEvent(event: AsyncPlayerPreLoginEvent) {
+    fun onAsyncPlayerPreLoginEvent(event: AsyncPlayerPreLoginEvent)
+    {
         ProfileHandler.loadProfile(event.uniqueId)
     }
 
     @EventHandler
-    fun onPlayerJoinEvent(event: PlayerJoinEvent) {
+    fun onPlayerJoinEvent(event: PlayerJoinEvent)
+    {
         val profile = ProfileHandler.getProfile(event.player)
-        if (profile != null) {
-            if (profile.track != null) {
+        if (profile != null)
+        {
+            if (profile.track != null)
+            {
                 profile.track!!.cachedPlayer = event.player
             }
 
-            if (CosmeticsPlugin.instance.hook.inSupportedRegion(event.player)) {
-                for (cosmetic in profile.getEnabledCosmetics()) {
-                    if (profile.isCosmeticEnabled(cosmetic) || !cosmetic.hasState()) {
+            if (CosmeticsPlugin.instance.hook.inSupportedRegion(event.player))
+            {
+                for (cosmetic in profile.getEnabledCosmetics())
+                {
+                    if (profile.isCosmeticEnabled(cosmetic) || !cosmetic.hasState())
+                    {
                         cosmetic.onEnable(event.player)
                     }
                 }
@@ -35,29 +44,34 @@ object ProfileLoadListeners : Listener {
     }
 
     @EventHandler
-    fun onPlayerQuitEvent(event: PlayerQuitEvent) {
+    fun onPlayerQuitEvent(event: PlayerQuitEvent)
+    {
         val profile = ProfileHandler.getProfile(event.player)
-        if (profile != null) {
-            for (cosmetic in profile.getEnabledCosmetics()) {
+        if (profile != null)
+        {
+            for (cosmetic in profile.getEnabledCosmetics())
+            {
                 cosmetic.onDisable(event.player)
 
-                if (cosmetic is TickableCosmetic) {
+                if (cosmetic is TickableCosmetic)
+                {
                     cosmetic.ticks.remove(event.player.uniqueId)
                 }
 
                 profile.requiresSave = true
             }
 
-            if (profile.track != null) {
+            if (profile.track != null)
+            {
                 profile.track!!.cachedPlayer = null
             }
 
             ProfileHandler.forgetProfile(profile)
 
-            if (profile.requiresSave) {
+            if (profile.requiresSave)
+            {
                 ProfileHandler.saveProfile(profile)
             }
         }
     }
-
 }

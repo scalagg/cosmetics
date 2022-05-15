@@ -1,5 +1,6 @@
 package com.minexd.cosmetics.menu
 
+import com.cryptomorin.xseries.XMaterial
 import com.minexd.cosmetics.CosmeticsPlugin
 import com.minexd.cosmetics.category.*
 import net.evilblock.cubed.menu.Button
@@ -67,8 +68,8 @@ class CategoriesMenu : Menu() {
             }
         }
 
-        override fun getMaterial(player: Player): Material {
-            return Material.NETHER_STAR
+        override fun getMaterial(player: Player): XMaterial {
+            return XMaterial.NETHER_STAR
         }
     }
 

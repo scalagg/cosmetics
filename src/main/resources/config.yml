@@ -1,8 +1,0 @@
-# The name of the database used to store
-storage:
-  database: "SolexGames"
-  collection: "cosmetics_players"
-
-# If this server is considered a game-mode server.
-# If true, cosmetics won't modify player data without certain checks in place.
-game-server: false

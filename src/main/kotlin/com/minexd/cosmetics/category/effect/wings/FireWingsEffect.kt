@@ -1,6 +1,6 @@
 package com.minexd.cosmetics.category.effect.wings
 
-import com.minexd.cosmetics.CosmeticCategory
+import com.minexd.cosmetics.cosmetic.category.CosmeticCategory
 import com.minexd.cosmetics.category.EffectsCategory
 import net.evilblock.cubed.util.bukkit.ItemBuilder
 import org.bukkit.Color
@@ -17,7 +17,8 @@ object FireWingsEffect : WingsEffect(Color.RED, Color.ORANGE, Color.YELLOW) {
         return "Fire Wings"
     }
 
-    override fun getCategory(): CosmeticCategory {
+    override fun getCategory(): CosmeticCategory
+    {
         return EffectsCategory
     }
 

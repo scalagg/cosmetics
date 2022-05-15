@@ -1,14 +1,15 @@
 package com.minexd.cosmetics.category
 
-import com.minexd.cosmetics.Cosmetic
-import com.minexd.cosmetics.CosmeticCategory
+import com.minexd.cosmetics.cosmetic.Cosmetic
+import com.minexd.cosmetics.cosmetic.category.CosmeticCategory
 import com.minexd.cosmetics.category.emote.EmotesBoxCosmetic
 import net.evilblock.cubed.util.CC
 import net.evilblock.cubed.util.bukkit.ItemBuilder
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 
-object EmotesCategory : CosmeticCategory {
+object EmotesCategory : CosmeticCategory
+{
 
     private val cosmetics = arrayListOf<Cosmetic>(
         EmotesBoxCosmetic

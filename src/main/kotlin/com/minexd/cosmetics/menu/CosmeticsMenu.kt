@@ -1,7 +1,6 @@
 package com.minexd.cosmetics.menu
 
-import com.minexd.cosmetics.CosmeticCategory
-import com.minexd.cosmetics.CosmeticsPlugin
+import com.minexd.cosmetics.cosmetic.category.CosmeticCategory
 import net.evilblock.cubed.menu.Button
 import net.evilblock.cubed.menu.buttons.BackButton
 import net.evilblock.cubed.menu.pagination.PaginatedMenu

@@ -1,8 +1,8 @@
 package com.minexd.cosmetics.category.outfit
 
-import com.minexd.cosmetics.CosmeticCategory
+import com.minexd.cosmetics.cosmetic.category.CosmeticCategory
 import com.minexd.cosmetics.CosmeticsPlugin
-import com.minexd.cosmetics.TickableCosmetic
+import com.minexd.cosmetics.cosmetic.TickableCosmetic
 import com.minexd.cosmetics.category.OutfitsCategory
 import net.evilblock.cubed.util.CC
 import net.evilblock.cubed.util.bukkit.ItemBuilder
@@ -16,7 +16,8 @@ import org.bukkit.inventory.ItemStack
 
 class AstronautOutfit : TickableCosmetic(), Listener {
 
-    override fun getCategory(): CosmeticCategory {
+    override fun getCategory(): CosmeticCategory
+    {
         return OutfitsCategory
     }
 

@@ -1,5 +1,6 @@
 package com.minexd.cosmetics.category.track.menu
 
+import com.cryptomorin.xseries.XMaterial
 import com.minexd.cosmetics.category.track.Track
 import com.minexd.cosmetics.category.track.TrackHandler
 import net.evilblock.cubed.menu.Button
@@ -17,71 +18,93 @@ import org.bukkit.entity.Player
 import org.bukkit.event.inventory.ClickType
 import org.bukkit.inventory.InventoryView
 
-class TrackEditorMenu : PaginatedMenu() {
-
-    init {
+class TrackEditorMenu : PaginatedMenu()
+{
+    init
+    {
         updateAfterClick = true
     }
 
-    override fun getPrePaginatedTitle(player: Player): String {
+    override fun getPrePaginatedTitle(player: Player): String
+    {
         return "Track Editor"
     }
 
-    override fun getAllPagesButtons(player: Player): Map<Int, Button> {
+    override fun getAllPagesButtons(player: Player): Map<Int, Button>
+    {
         val buttons = hashMapOf<Int, Button>()
 
-        for (track in TrackHandler.getTracks()) {
+        for (track in TrackHandler.getTracks())
+        {
             buttons[buttons.size] = TrackButton(track)
         }
 
         return buttons
     }
 
-    override fun getGlobalButtons(player: Player): Map<Int, Button>? {
+    override fun getGlobalButtons(player: Player): Map<Int, Button>?
+    {
         val buttons = hashMapOf<Int, Button>()
 
         buttons[2] = AddTrackButton()
 
-        for (i in 9..17) {
+        for (i in 9..17)
+        {
             buttons[i] = GlassButton(0)
         }
 
         return buttons
     }
 
-    override fun getPageButtonSlots(): Pair<Int, Int> {
+    override fun getPageButtonSlots(): Pair<Int, Int>
+    {
         return Pair(0, 8)
     }
 
-    override fun getButtonsStartOffset(): Int {
+    override fun getButtonsStartOffset(): Int
+    {
         return 9
     }
 
-    override fun getMaxItemsPerPage(player: Player): Int {
+    override fun getMaxItemsPerPage(player: Player): Int
+    {
         return 36
     }
 
-    override fun size(buttons: Map<Int, Button>): Int {
+    override fun size(buttons: Map<Int, Button>): Int
+    {
         return 54
     }
 
-    private inner class TrackButton(private val track: Track) : Button() {
-        override fun getName(player: Player): String {
+    private inner class TrackButton(private val track: Track) : Button()
+    {
+        override fun getName(player: Player): String
+        {
             return track.getName()
         }
 
-        override fun getDescription(player: Player): List<String> {
+        override fun getDescription(player: Player): List<String>
+        {
             val description = arrayListOf<String>()
 
             description.add("${ChatColor.GRAY}(ID: ${track.getRawID()})")
             description.add("${ChatColor.GRAY}(${track.getPermission()})")
             description.add("")
 
-            if (track.blockTypes.isEmpty()) {
+            if (track.blockTypes.isEmpty())
+            {
                 description.add("${ChatColor.GRAY}- Has no blocks")
-            } else {
-                for (blockType in track.blockTypes) {
-                    description.add("${ChatColor.GRAY}- ${blockType.blockName()} ${ChatColor.GRAY}(${Numbers.formatDecimal(blockType.chance)}%)")
+            } else
+            {
+                for (blockType in track.blockTypes)
+                {
+                    description.add(
+                        "${ChatColor.GRAY}- ${blockType.blockName()} ${ChatColor.GRAY}(${
+                            Numbers.formatDecimal(
+                                blockType.chance
+                            )
+                        }%)"
+                    )
                 }
             }
 
@@ -92,16 +115,24 @@ class TrackEditorMenu : PaginatedMenu() {
             return description
         }
 
-        override fun getMaterial(player: Player): Material {
-            return Material.RAILS
+        override fun getMaterial(player: Player): XMaterial
+        {
+            return XMaterial
+                .matchXMaterial(
+                    Material.RAILS
+                )
         }
 
-        override fun clicked(player: Player, slot: Int, clickType: ClickType, view: InventoryView) {
-            if (clickType.isLeftClick) {
+        override fun clicked(player: Player, slot: Int, clickType: ClickType, view: InventoryView)
+        {
+            if (clickType.isLeftClick)
+            {
                 EditTrackMenu(track).openMenu(player)
-            } else if (clickType.isRightClick) {
+            } else if (clickType.isRightClick)
+            {
                 ConfirmMenu { confirmed ->
-                    if (confirmed) {
+                    if (confirmed)
+                    {
                         TrackHandler.forgetTrack(track)
 
                         Tasks.async {
@@ -113,12 +144,15 @@ class TrackEditorMenu : PaginatedMenu() {
         }
     }
 
-    private inner class AddTrackButton : AddButton() {
-        override fun getName(player: Player): String {
+    private inner class AddTrackButton : AddButton()
+    {
+        override fun getName(player: Player): String
+        {
             return "${ChatColor.AQUA}${ChatColor.BOLD}Add New Track"
         }
 
-        override fun getDescription(player: Player): List<String> {
+        override fun getDescription(player: Player): List<String>
+        {
             val description = arrayListOf<String>()
 
             description.add("")
@@ -129,8 +163,10 @@ class TrackEditorMenu : PaginatedMenu() {
             return description
         }
 
-        override fun clicked(player: Player, slot: Int, clickType: ClickType, view: InventoryView) {
-            if (clickType.isLeftClick) {
+        override fun clicked(player: Player, slot: Int, clickType: ClickType, view: InventoryView)
+        {
+            if (clickType.isLeftClick)
+            {
                 EzPrompt.Builder()
                     .charLimit(48)
                     .promptText("${ChatColor.GREEN}Please input a unique ID for the new track.")
@@ -149,5 +185,4 @@ class TrackEditorMenu : PaginatedMenu() {
             }
         }
     }
-
 }

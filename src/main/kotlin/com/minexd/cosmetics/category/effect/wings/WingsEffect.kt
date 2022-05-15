@@ -1,6 +1,6 @@
 package com.minexd.cosmetics.category.effect.wings
 
-import com.minexd.cosmetics.TickableCosmetic
+import com.minexd.cosmetics.cosmetic.TickableCosmetic
 import com.minexd.cosmetics.profile.ProfileHandler
 import net.evilblock.cubed.util.nms.MinecraftReflection
 import net.evilblock.cubed.util.nms.particle.ParticleMeta

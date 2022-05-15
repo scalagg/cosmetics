@@ -1,6 +1,6 @@
 package com.minexd.cosmetics.category.effect.trail
 
-import com.minexd.cosmetics.CosmeticCategory
+import com.minexd.cosmetics.cosmetic.category.CosmeticCategory
 import com.minexd.cosmetics.category.EffectsCategory
 import net.evilblock.cubed.util.nms.MinecraftReflection
 import org.bukkit.Material
@@ -8,7 +8,8 @@ import org.bukkit.inventory.ItemStack
 
 object FlameRingsEffect : RingsEffect(MinecraftReflection.getEnumParticle("FLAME")!!) {
 
-    override fun getCategory(): CosmeticCategory {
+    override fun getCategory(): CosmeticCategory
+    {
         return EffectsCategory
     }
 

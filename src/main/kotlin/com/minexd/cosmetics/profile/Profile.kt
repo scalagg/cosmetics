@@ -2,16 +2,20 @@ package com.minexd.cosmetics.profile
 
 import com.google.gson.*
 import com.google.gson.annotations.JsonAdapter
-import com.minexd.cosmetics.Cosmetic
+import com.minexd.cosmetics.cosmetic.Cosmetic
 import com.minexd.cosmetics.CosmeticsPlugin
 import com.minexd.cosmetics.category.track.TrackHandler
 import com.minexd.cosmetics.category.track.player.PlayerTrack
+import gg.scala.store.storage.storable.IDataStoreObject
 import java.lang.reflect.Type
 import java.util.*
 import kotlin.collections.HashMap
 
-class Profile(val uuid: UUID) {
-
+class Profile(
+    val uuid: UUID,
+    override val identifier: UUID = uuid
+) : IDataStoreObject
+{
     @JsonAdapter(StatesMapSerializer::class)
     private val cosmetics: HashMap<Cosmetic, Boolean> = hashMapOf()
 
@@ -24,39 +28,59 @@ class Profile(val uuid: UUID) {
     @Transient
     var lastMovement: Long = System.currentTimeMillis()
 
-    fun getEnabledCosmetics(): List<Cosmetic> {
+    fun getEnabledCosmetics(): List<Cosmetic>
+    {
         return cosmetics.filter { it.value }.keys.toList()
     }
 
-    fun isCosmeticEnabled(cosmetic: Cosmetic): Boolean {
+    fun isCosmeticEnabled(cosmetic: Cosmetic): Boolean
+    {
         return cosmetics.getOrDefault(cosmetic, false)
     }
 
-    fun toggleCosmetic(cosmetic: Cosmetic) {
-        if (cosmetics.containsKey(cosmetic)) {
+    fun toggleCosmetic(cosmetic: Cosmetic)
+    {
+        if (cosmetics.containsKey(cosmetic))
+        {
             cosmetics[cosmetic] = !cosmetics[cosmetic]!!
-        } else {
+        } else
+        {
             cosmetics[cosmetic] = true
         }
 
         requiresSave = true
     }
 
-    object StatesMapSerializer : JsonSerializer<HashMap<Cosmetic, Boolean>>, JsonDeserializer<HashMap<Cosmetic, Boolean>> {
-        override fun serialize(map: HashMap<Cosmetic, Boolean>, type: Type, context: JsonSerializationContext): JsonElement {
+    object StatesMapSerializer : JsonSerializer<HashMap<Cosmetic, Boolean>>,
+        JsonDeserializer<HashMap<Cosmetic, Boolean>>
+    {
+        override fun serialize(
+            map: HashMap<Cosmetic, Boolean>,
+            type: Type,
+            context: JsonSerializationContext
+        ): JsonElement
+        {
             return JsonObject().also {
-                for ((key, value) in map) {
+                for ((key, value) in map)
+                {
                     it.addProperty(key.getID(), value)
                 }
             }
         }
 
-        override fun deserialize(json: JsonElement, type: Type, context: JsonDeserializationContext): HashMap<Cosmetic, Boolean> {
+        override fun deserialize(
+            json: JsonElement,
+            type: Type,
+            context: JsonDeserializationContext
+        ): HashMap<Cosmetic, Boolean>
+        {
             return hashMapOf<Cosmetic, Boolean>().also {
                 val obj = json.asJsonObject
-                for ((key, value) in obj.entrySet()) {
+                for ((key, value) in obj.entrySet())
+                {
                     val cosmetic = CosmeticsPlugin.instance.getCosmeticById(key)
-                    if (cosmetic != null) {
+                    if (cosmetic != null)
+                    {
                         it[cosmetic] = value.asBoolean
                     }
                 }
@@ -64,27 +88,35 @@ class Profile(val uuid: UUID) {
         }
     }
 
-    object PlayerTrackSerializer : JsonSerializer<PlayerTrack>, JsonDeserializer<PlayerTrack> {
-        override fun serialize(track: PlayerTrack?, type: Type, context: JsonSerializationContext): JsonElement {
-            return if (track == null) {
+    object PlayerTrackSerializer : JsonSerializer<PlayerTrack>, JsonDeserializer<PlayerTrack>
+    {
+        override fun serialize(track: PlayerTrack?, type: Type, context: JsonSerializationContext): JsonElement
+        {
+            return if (track == null)
+            {
                 JsonNull.INSTANCE
-            } else {
+            } else
+            {
                 JsonPrimitive(track.track.getRawID())
             }
         }
 
-        override fun deserialize(json: JsonElement?, type: Type, context: JsonDeserializationContext): PlayerTrack? {
-            return if (json == null) {
+        override fun deserialize(json: JsonElement?, type: Type, context: JsonDeserializationContext): PlayerTrack?
+        {
+            return if (json == null)
+            {
                 null
-            } else {
+            } else
+            {
                 val track = TrackHandler.getTrackById(json.asString)
-                if (track != null) {
+                if (track != null)
+                {
                     PlayerTrack(track = track)
-                } else {
+                } else
+                {
                     null
                 }
             }
         }
     }
-
 }

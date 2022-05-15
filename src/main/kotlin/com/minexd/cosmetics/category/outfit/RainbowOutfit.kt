@@ -1,8 +1,8 @@
 package com.minexd.cosmetics.category.outfit
 
-import com.minexd.cosmetics.CosmeticCategory
+import com.minexd.cosmetics.cosmetic.category.CosmeticCategory
 import com.minexd.cosmetics.CosmeticsPlugin
-import com.minexd.cosmetics.TickableCosmetic
+import com.minexd.cosmetics.cosmetic.TickableCosmetic
 import com.minexd.cosmetics.category.OutfitsCategory
 import net.evilblock.cubed.util.bukkit.ItemBuilder
 import org.bukkit.ChatColor
@@ -19,7 +19,8 @@ class RainbowOutfit : TickableCosmetic(), Listener {
     private val map = hashMapOf<UUID, RainbowData>()
     private val name = ChatColor.translateAlternateColorCodes('&', "&4&lR&c&lA&6&lI&e&lN&a&lB&2&lO&b&lW &3&lA&9&lR&1&lM&5&lO&d&lR")
 
-    override fun getCategory(): CosmeticCategory {
+    override fun getCategory(): CosmeticCategory
+    {
         return OutfitsCategory
     }
 

@@ -8,19 +8,18 @@
 
 # Maven
 log/
-target/
+/target/
 dependency-reduced-pom.xml
 
 # Java
-*.jar
+#*.jar
 
 # JRebel
 rebel.xml
 
 # Keep libs
-!lib/*.jar
+#!lib/*.jar
 
-gradle/
 .gradle
 **/build/
 !src/**/build/

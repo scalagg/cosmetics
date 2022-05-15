@@ -1,7 +1,7 @@
 package com.minexd.cosmetics.category.track
 
-import com.minexd.cosmetics.Cosmetic
-import com.minexd.cosmetics.CosmeticCategory
+import com.minexd.cosmetics.cosmetic.Cosmetic
+import com.minexd.cosmetics.cosmetic.category.CosmeticCategory
 import com.minexd.cosmetics.category.TracksCategory
 import net.evilblock.cubed.util.math.Chance
 import org.bukkit.ChatColor
@@ -21,7 +21,8 @@ class Track(private val id: String) : Cosmetic(), Listener {
     var blockTime: Long = 3000L
     val blockTypes: MutableList<TrackBlock> = arrayListOf()
 
-    override fun getCategory(): CosmeticCategory {
+    override fun getCategory(): CosmeticCategory
+    {
         return TracksCategory
     }
 

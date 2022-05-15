@@ -2,7 +2,7 @@ package com.minexd.cosmetics.hook
 
 import org.bukkit.entity.Player
 
-interface Hook {
+interface CosmeticHook {
 
     fun inSupportedRegion(player: Player): Boolean
 

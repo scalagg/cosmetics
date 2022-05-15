@@ -1,6 +1,6 @@
 package com.minexd.cosmetics.menu
 
-import com.minexd.cosmetics.Cosmetic
+import com.minexd.cosmetics.cosmetic.Cosmetic
 import com.minexd.cosmetics.profile.ProfileHandler
 import net.evilblock.cubed.menu.Button
 import net.evilblock.cubed.util.text.TextSplitter
@@ -11,7 +11,6 @@ import org.bukkit.event.inventory.ClickType
 import org.bukkit.inventory.InventoryView
 import org.bukkit.inventory.ItemFlag
 import org.bukkit.inventory.meta.ItemMeta
-import org.bukkit.inventory.meta.LeatherArmorMeta
 
 class CosmeticButton(private val cosmetic: Cosmetic) : Button() {
 

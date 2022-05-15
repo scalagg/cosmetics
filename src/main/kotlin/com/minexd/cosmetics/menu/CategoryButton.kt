@@ -1,6 +1,6 @@
 package com.minexd.cosmetics.menu
 
-import com.minexd.cosmetics.CosmeticCategory
+import com.minexd.cosmetics.cosmetic.category.CosmeticCategory
 import com.minexd.cosmetics.category.EmotesCategory
 import com.minexd.cosmetics.category.TracksCategory
 import com.minexd.cosmetics.category.emote.menu.EmoteBoxMenu

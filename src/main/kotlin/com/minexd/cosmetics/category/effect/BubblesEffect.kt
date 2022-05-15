@@ -1,7 +1,7 @@
 package com.minexd.cosmetics.category.effect
 
-import com.minexd.cosmetics.CosmeticCategory
-import com.minexd.cosmetics.TickableCosmetic
+import com.minexd.cosmetics.cosmetic.category.CosmeticCategory
+import com.minexd.cosmetics.cosmetic.TickableCosmetic
 import com.minexd.cosmetics.category.EffectsCategory
 import net.evilblock.cubed.util.nms.MinecraftReflection
 import net.evilblock.cubed.util.nms.particle.ParticleMeta
@@ -14,7 +14,8 @@ import java.util.concurrent.ThreadLocalRandom
 
 object BubblesEffect : TickableCosmetic(), Listener {
 
-    override fun getCategory(): CosmeticCategory {
+    override fun getCategory(): CosmeticCategory
+    {
         return EffectsCategory
     }
 

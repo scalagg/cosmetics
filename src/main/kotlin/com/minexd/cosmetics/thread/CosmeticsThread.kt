@@ -1,57 +1,76 @@
 package com.minexd.cosmetics.thread
 
 import com.minexd.cosmetics.CosmeticsPlugin
-import com.minexd.cosmetics.TickableCosmetic
+import com.minexd.cosmetics.cosmetic.TickableCosmetic
 import com.minexd.cosmetics.profile.Profile
 import com.minexd.cosmetics.profile.ProfileHandler
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 
-class CosmeticsThread : Thread("Cosmetics - Tick Thread") {
+class CosmeticsThread : Thread("Cosmetics - Tick Thread")
+{
 
-    var lastSave: Long = System.currentTimeMillis()
+    private var lastSave = System.currentTimeMillis()
 
-    override fun run() {
-        while (true) {
-            try {
+    override fun run()
+    {
+        while (true)
+        {
+            try
+            {
                 runLogic()
-            } catch (e: Exception) {
+            } catch (e: Exception)
+            {
                 e.printStackTrace()
             }
 
-            try {
+            try
+            {
                 sleep(50L)
-            } catch (e: InterruptedException) {
+            } catch (e: InterruptedException)
+            {
                 e.printStackTrace()
             }
         }
     }
 
-    private fun runLogic() {
-        if (System.currentTimeMillis() - lastSave >= 30_000L) {
+    private fun runLogic()
+    {
+        if (System.currentTimeMillis() - lastSave >= 30_000L)
+        {
             lastSave = System.currentTimeMillis()
 
-            for (profile in ProfileHandler.getProfiles()) {
-                try {
-                    if (profile.requiresSave) {
+            for (profile in ProfileHandler.getProfiles())
+            {
+                try
+                {
+                    if (profile.requiresSave)
+                    {
                         ProfileHandler.saveProfile(profile)
                     }
-                } catch (e: Exception) {
+                } catch (e: Exception)
+                {
                     e.printStackTrace()
                 }
             }
         }
 
-        for (player in Bukkit.getOnlinePlayers()) {
-            try {
-                if (!player.isOnline) {
+        for (player in Bukkit.getOnlinePlayers())
+        {
+            try
+            {
+                if (!player.isOnline)
+                {
                     continue
                 }
 
                 val profile = ProfileHandler.getProfile(player)
-                if (profile != null) {
-                    if (!CosmeticsPlugin.instance.hook.inSupportedRegion(player)) {
-                        for (cosmetic in profile.getEnabledCosmetics()) {
+                if (profile != null)
+                {
+                    if (!CosmeticsPlugin.instance.hook.inSupportedRegion(player))
+                    {
+                        for (cosmetic in profile.getEnabledCosmetics())
+                        {
                             ProfileHandler.toggleCosmetic(player, cosmetic)
                         }
 
@@ -64,28 +83,35 @@ class CosmeticsThread : Thread("Cosmetics - Tick Thread") {
                     tickCosmetics(player, profile)
                     tickTrack(player, profile)
                 }
-            } catch (e: Exception) {
+            } catch (e: Exception)
+            {
                 e.printStackTrace()
             }
         }
     }
 
-    private fun tickCosmetics(player: Player, profile: Profile) {
-        for (cosmetic in profile.getEnabledCosmetics()) {
-            if (cosmetic is TickableCosmetic) {
+    private fun tickCosmetics(player: Player, profile: Profile)
+    {
+        for (cosmetic in profile.getEnabledCosmetics())
+        {
+            if (cosmetic is TickableCosmetic)
+            {
                 cosmetic.tick(player)
             }
         }
     }
 
-    private fun tickTrack(player: Player, profile: Profile) {
-        if (profile.track != null) {
-            try {
+    private fun tickTrack(player: Player, profile: Profile)
+    {
+        if (profile.track != null)
+        {
+            try
+            {
                 profile.track!!.tick()
-            } catch (e: Exception) {
+            } catch (e: Exception)
+            {
                 e.printStackTrace()
             }
         }
     }
-
 }
