@@ -5,6 +5,7 @@ import gg.scala.cosmetics.category.track.TrackHandler
 import gg.scala.cosmetics.category.track.player.PlayerTrack
 import gg.scala.cosmetics.cosmetic.Cosmetic
 import gg.scala.store.storage.storable.IDataStoreObject
+import org.bukkit.Bukkit
 import java.util.*
 
 class CosmeticsPlayer(
@@ -36,7 +37,10 @@ class CosmeticsPlayer(
         this.transientPlayerTrack =
             PlayerTrack(
                 TrackHandler.getTrackById(this.track!!)!!
-            )
+            ).apply {
+                this.cachedPlayer =
+                    Bukkit.getPlayer(uuid)
+            }
         this.transientPlayerTrack
     } else
     {
