@@ -3,14 +3,20 @@ package gg.scala.cosmetics.category.track
 import gg.scala.cosmetics.cosmetic.Cosmetic
 import gg.scala.cosmetics.cosmetic.category.CosmeticCategory
 import gg.scala.cosmetics.category.TracksCategory
+import gg.scala.store.storage.storable.IDataStoreObject
 import net.evilblock.cubed.util.math.Chance
 import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.event.Listener
 import org.bukkit.inventory.ItemStack
+import java.util.*
 
-class Track(private val id: String) : Cosmetic(), Listener {
-
+class Track(
+    private val id: String,
+    override val identifier: UUID =
+        UUID.randomUUID()
+) : Cosmetic(), Listener, IDataStoreObject
+{
     var displayName: String = id.toLowerCase()
     var displayIcon: ItemStack? = null
     var desc: String = ""
@@ -26,36 +32,45 @@ class Track(private val id: String) : Cosmetic(), Listener {
         return TracksCategory
     }
 
-    override fun getID(): String {
+    override fun getID(): String
+    {
         return "track-$id"
     }
 
-    fun getRawID(): String {
+    fun getRawID(): String
+    {
         return id
     }
 
-    override fun getName(): String {
+    override fun getName(): String
+    {
         return "$displayName Track"
     }
 
-    override fun getIcon(): ItemStack {
+    override fun getIcon(): ItemStack
+    {
         return displayIcon ?: ItemStack(Material.RAILS)
     }
 
-    override fun getDescription(): String {
+    override fun getDescription(): String
+    {
         return desc
     }
 
-    override fun getPermission(): String {
+    override fun getPermission(): String
+    {
         return "cosmetics.tracks.${ChatColor.stripColor(displayName.toLowerCase())}"
     }
 
-    fun nextBlockType(): TrackBlock {
-        if (blockTypes.isEmpty()) {
+    fun nextBlockType(): TrackBlock
+    {
+        if (blockTypes.isEmpty())
+        {
             throw IllegalStateException("Track has no block types registered")
         }
 
-        if (!blockTypes.any { it.chance > 0.0 }) {
+        if (!blockTypes.any { it.chance > 0.0 })
+        {
             throw IllegalStateException("Track has no block types with a chance more than 0")
         }
 

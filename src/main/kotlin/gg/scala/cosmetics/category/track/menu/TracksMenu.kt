@@ -74,7 +74,7 @@ class TracksMenu(
 
     private inner class TrackButton(private val track: Track) : Button() {
         override fun getName(player: Player): String {
-            return track.getName()
+            return "${CC.PRI}${track.getName()}"
         }
 
         override fun getDescription(player: Player): List<String> {
