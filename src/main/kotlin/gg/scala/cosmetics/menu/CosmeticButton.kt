@@ -2,11 +2,10 @@ package gg.scala.cosmetics.menu
 
 import com.cryptomorin.xseries.XMaterial
 import gg.scala.cosmetics.cosmetic.Cosmetic
-import gg.scala.cosmetics.profile.ProfileHandler
+import gg.scala.cosmetics.profile.CosmeticsPlayerHandler
 import net.evilblock.cubed.menu.Button
 import net.evilblock.cubed.util.text.TextSplitter
 import org.bukkit.ChatColor
-import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.event.inventory.ClickType
 import org.bukkit.inventory.InventoryView
@@ -33,7 +32,7 @@ class CosmeticButton(private val cosmetic: Cosmetic) : Button() {
 
     override fun getName(player: Player): String {
         return if (player.hasPermission(cosmetic.getPermission())) {
-            val color = if (ProfileHandler.isCosmeticEnabled(player, cosmetic)) {
+            val color = if (CosmeticsPlayerHandler.isCosmeticEnabled(player, cosmetic)) {
                 ChatColor.GREEN.toString()
             } else {
                 ChatColor.RED.toString()
@@ -47,22 +46,17 @@ class CosmeticButton(private val cosmetic: Cosmetic) : Button() {
 
     override fun getDescription(player: Player): List<String> {
         return arrayListOf<String>().also { desc ->
-            if (player.isOp || player.hasPermission("cosmetics.admin")) {
-                desc.add("${ChatColor.DARK_GRAY}(${cosmetic.getPermission()})")
-            }
-
-            desc.add("")
 
             if (player.hasPermission(cosmetic.getPermission())) {
                 desc.addAll(TextSplitter.split(text = cosmetic.getDescription()))
                 desc.add("")
 
-                val profile = ProfileHandler.getProfile(player)
+                val profile = CosmeticsPlayerHandler.getProfile(player)
                 if (profile != null) {
                     if (profile.isCosmeticEnabled(cosmetic)) {
-                        desc.add("${ChatColor.YELLOW}Click to ${ChatColor.RED}disable ${ChatColor.YELLOW}this cosmetic.")
+                        desc.add("${ChatColor.GOLD}Click to disable this cosmetic!")
                     } else {
-                        desc.add("${ChatColor.YELLOW}Click to ${ChatColor.GREEN}enable ${ChatColor.YELLOW}this cosmetic.")
+                        desc.add("${ChatColor.GREEN}Click to enable this cosmetic!")
                     }
                 }
             } else {
@@ -76,7 +70,7 @@ class CosmeticButton(private val cosmetic: Cosmetic) : Button() {
 
     override fun clicked(player: Player, slot: Int, clickType: ClickType, view: InventoryView) {
         if (player.hasPermission(cosmetic.getPermission())) {
-            ProfileHandler.toggleCosmetic(player, cosmetic)
+            CosmeticsPlayerHandler.toggleCosmetic(player, cosmetic)
         }
     }
 

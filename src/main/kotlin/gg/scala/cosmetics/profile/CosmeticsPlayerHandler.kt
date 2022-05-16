@@ -13,53 +13,60 @@ import java.util.*
 import java.util.concurrent.CompletableFuture
 
 @Service
-object ProfileHandler
+object CosmeticsPlayerHandler
 {
-    private lateinit var profileLayer: DataStoreObjectController<Profile>
+    private lateinit var cosmeticsPlayerLayer: DataStoreObjectController<CosmeticsPlayer>
 
-    private val profiles: Map<UUID, Profile>
-        get() = profileLayer.localCache()
+    private val profiles: Map<UUID, CosmeticsPlayer>
+        get() = cosmeticsPlayerLayer.localCache()
 
     @Configure
     fun configure()
     {
-        this.profileLayer =
+        this.cosmeticsPlayerLayer =
             DataStoreObjectControllerCache.create()
     }
 
-    fun getProfiles(): Collection<Profile>
+    fun getProfiles(): Collection<CosmeticsPlayer>
     {
         return profiles.values
     }
 
-    fun getProfile(player: Player): Profile?
+    fun getProfile(player: Player): CosmeticsPlayer?
     {
         return profiles[player.uniqueId]
     }
 
     fun loadProfile(uuid: UUID)
     {
-        this.profileLayer
+        this.cosmeticsPlayerLayer
             .load(uuid, DataStoreStorageType.MONGO)
+            .exceptionally {
+                it.printStackTrace()
+                return@exceptionally null
+            }
             .thenAccept {
-                this.profileLayer
-                    .localCache()[uuid] = it ?: Profile(uuid)
+                this.cosmeticsPlayerLayer
+                    .localCache()[uuid] = it ?: CosmeticsPlayer(uuid)
             }
     }
 
-    fun forgetProfile(profile: Profile)
+    fun forgetProfile(cosmeticsPlayer: CosmeticsPlayer)
     {
-        this.profileLayer
+        this.cosmeticsPlayerLayer
             .localCache()
-            .remove(profile.uuid)
+            .remove(cosmeticsPlayer.uuid)
     }
 
-    fun saveProfile(profile: Profile): CompletableFuture<Unit>
+    fun saveProfile(cosmeticsPlayer: CosmeticsPlayer): CompletableFuture<Unit>
     {
-        return profileLayer.save(
-            profile, DataStoreStorageType.MONGO
-        ).thenApply {
-            profile.requiresSave = false
+        return cosmeticsPlayerLayer.save(
+            cosmeticsPlayer, DataStoreStorageType.MONGO
+        ).exceptionally {
+            it.printStackTrace()
+            return@exceptionally null
+        }.thenApply {
+            cosmeticsPlayer.requiresSave = false
         }
     }
 

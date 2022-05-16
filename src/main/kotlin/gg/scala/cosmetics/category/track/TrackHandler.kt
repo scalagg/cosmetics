@@ -11,7 +11,10 @@ import java.io.File
 @Service
 object TrackHandler
 {
-    private val dataFile = File(gg.scala.cosmetics.CosmeticsPlugin.instance.dataFolder, "tracks.json")
+    private val dataFile = File(
+        CosmeticsPlugin.instance.dataFolder, "tracks.json"
+    )
+
     private val dataType = object : TypeToken<List<Track>>()
     {}.type
 

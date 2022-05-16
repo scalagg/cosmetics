@@ -1,6 +1,6 @@
 package gg.scala.cosmetics.listener
 
-import gg.scala.cosmetics.profile.ProfileHandler
+import gg.scala.cosmetics.profile.CosmeticsPlayerHandler
 import gg.scala.commons.annotations.Listeners
 import net.evilblock.cubed.util.bukkit.EventUtils
 import org.bukkit.event.EventHandler
@@ -17,7 +17,7 @@ object CosmeticsListeners : Listener
     {
         if (EventUtils.hasPlayerMoved(event))
         {
-            ProfileHandler.getProfile(event.player)?.lastMovement = System.currentTimeMillis()
+            CosmeticsPlayerHandler.getProfile(event.player)?.lastMovement = System.currentTimeMillis()
         }
     }
 
@@ -26,7 +26,7 @@ object CosmeticsListeners : Listener
     {
         if (EventUtils.hasPlayerMoved(event))
         {
-            ProfileHandler.getProfile(event.player)?.lastMovement = System.currentTimeMillis()
+            CosmeticsPlayerHandler.getProfile(event.player)?.lastMovement = System.currentTimeMillis()
         }
     }
 }

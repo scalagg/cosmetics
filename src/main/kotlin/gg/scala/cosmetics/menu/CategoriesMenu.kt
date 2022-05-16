@@ -26,29 +26,31 @@ class CategoriesMenu : Menu() {
 
     override fun getButtons(player: Player): Map<Int, Button> {
         return hashMapOf<Int, Button>().also { buttons ->
-            buttons[10] = InfoButton()
+            buttons[1] = InfoButton()
 
-            buttons[12] = CategoryButton(OutfitsCategory)
-            buttons[13] = CategoryButton(PetsCategory)
-            buttons[14] = CategoryButton(EffectsCategory)
-            buttons[15] = CategoryButton(EmotesCategory)
-            buttons[16] = CategoryButton(TracksCategory)
+            buttons[3] = CategoryButton(OutfitsCategory)
+            buttons[4] = CategoryButton(PetsCategory)
+            buttons[5] = CategoryButton(EffectsCategory)
+            buttons[6] = CategoryButton(EmotesCategory)
+            buttons[7] = CategoryButton(TracksCategory)
         }
     }
 
     override fun size(buttons: Map<Int, Button>): Int {
-        return 27
+        return 9
     }
 
     private inner class InfoButton : Button() {
         override fun getName(player: Player): String {
-            return "${CC.B_PRI}Your Cosmetics"
+            return "${CC.D_AQUA}Your Cosmetics"
         }
 
         override fun getDescription(player: Player): List<String> {
             return arrayListOf<String>().also { desc ->
-                val collected = gg.scala.cosmetics.CosmeticsPlugin.instance.getCosmetics().filter { player.hasPermission(it.getPermission()) }.size
-                val total = gg.scala.cosmetics.CosmeticsPlugin.instance.getCosmetics().size
+                val collected = CosmeticsPlugin.instance
+                    .getCosmetics()
+                    .filter { player.hasPermission(it.getPermission()) }.size
+                val total = CosmeticsPlugin.instance.getCosmetics().size
 
                 desc.add(buildString {
                     append("${ChatColor.GRAY}Collected: ")
@@ -57,14 +59,11 @@ class CategoriesMenu : Menu() {
                 })
 
                 desc.add("")
-                desc.add("${CC.GRAY}Collect cool and crazy")
-                desc.add("${CC.GRAY}cosmetics to show off in")
-                desc.add("${CC.GRAY}lobbies by winning games,")
-                desc.add("${CC.GRAY}unlocking achievements,")
-                desc.add("${CC.GRAY}and opening crates!")
-                desc.add("")
-                desc.add("${CC.YELLOW}Click a button to view")
-                desc.add("${CC.YELLOW}our available cosmetics.")
+                desc.add("${CC.WHITE}Collect cool and crazy")
+                desc.add("${CC.WHITE}cosmetics to show off in")
+                desc.add("${CC.WHITE}lobbies by winning games,")
+                desc.add("${CC.WHITE}unlocking achievements,")
+                desc.add("${CC.WHITE}and opening crates!")
             }
         }
 

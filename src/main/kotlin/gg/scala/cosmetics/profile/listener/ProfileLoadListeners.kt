@@ -2,7 +2,7 @@ package gg.scala.cosmetics.profile.listener
 
 import gg.scala.cosmetics.CosmeticsPlugin
 import gg.scala.cosmetics.cosmetic.TickableCosmetic
-import gg.scala.cosmetics.profile.ProfileHandler
+import gg.scala.cosmetics.profile.CosmeticsPlayerHandler
 import gg.scala.commons.annotations.Listeners
 import org.bukkit.event.EventHandler
 import org.bukkit.event.Listener
@@ -16,21 +16,21 @@ object ProfileLoadListeners : Listener
     @EventHandler
     fun onAsyncPlayerPreLoginEvent(event: AsyncPlayerPreLoginEvent)
     {
-        ProfileHandler.loadProfile(event.uniqueId)
+        CosmeticsPlayerHandler.loadProfile(event.uniqueId)
     }
 
     @EventHandler
     fun onPlayerJoinEvent(event: PlayerJoinEvent)
     {
-        val profile = ProfileHandler.getProfile(event.player)
+        val profile = CosmeticsPlayerHandler.getProfile(event.player)
         if (profile != null)
         {
-            if (profile.track != null)
+            if (profile.track() != null)
             {
-                profile.track!!.cachedPlayer = event.player
+                profile.track()!!.cachedPlayer = event.player
             }
 
-            if (gg.scala.cosmetics.CosmeticsPlugin.instance.hook.inSupportedRegion(event.player))
+            if (CosmeticsPlugin.instance.hook.inSupportedRegion(event.player))
             {
                 for (cosmetic in profile.getEnabledCosmetics())
                 {
@@ -46,7 +46,7 @@ object ProfileLoadListeners : Listener
     @EventHandler
     fun onPlayerQuitEvent(event: PlayerQuitEvent)
     {
-        val profile = ProfileHandler.getProfile(event.player)
+        val profile = CosmeticsPlayerHandler.getProfile(event.player)
         if (profile != null)
         {
             for (cosmetic in profile.getEnabledCosmetics())
@@ -61,16 +61,16 @@ object ProfileLoadListeners : Listener
                 profile.requiresSave = true
             }
 
-            if (profile.track != null)
+            if (profile.track() != null)
             {
-                profile.track!!.cachedPlayer = null
+                profile.track()!!.cachedPlayer = null
             }
 
-            ProfileHandler.forgetProfile(profile)
+            CosmeticsPlayerHandler.forgetProfile(profile)
 
             if (profile.requiresSave)
             {
-                ProfileHandler.saveProfile(profile)
+                CosmeticsPlayerHandler.saveProfile(profile)
             }
         }
     }

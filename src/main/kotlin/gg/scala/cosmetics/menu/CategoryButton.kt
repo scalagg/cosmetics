@@ -1,10 +1,10 @@
 package gg.scala.cosmetics.menu
 
-import gg.scala.cosmetics.cosmetic.category.CosmeticCategory
 import gg.scala.cosmetics.category.EmotesCategory
 import gg.scala.cosmetics.category.TracksCategory
 import gg.scala.cosmetics.category.emote.menu.EmoteBoxMenu
 import gg.scala.cosmetics.category.track.menu.TracksMenu
+import gg.scala.cosmetics.cosmetic.category.CosmeticCategory
 import net.evilblock.cubed.menu.Button
 import net.evilblock.cubed.util.CC
 import net.evilblock.cubed.util.bukkit.ItemBuilder
@@ -33,11 +33,11 @@ class CategoryButton(private val category: CosmeticCategory) : Button() {
             lore.add(buildString {
                 append("${ChatColor.GRAY}Unlocked: ")
                 append("${ChatColor.GREEN}${Numbers.format(unlocked)}")
-                append("${ChatColor.GRAY}/${CC.WHITE}${Numbers.format(total)}")
+                append("${ChatColor.GRAY}/${CC.GREEN}${Numbers.format(total)}")
             })
 
             lore.add("")
-            lore.add("${ChatColor.YELLOW}Click to browse ${ChatColor.GREEN}${category.getPluralName()}${CC.YELLOW}.")
+            lore.add("${ChatColor.GREEN }Click to browse.")
         }
     }
 
@@ -52,10 +52,10 @@ class CategoryButton(private val category: CosmeticCategory) : Button() {
     override fun clicked(player: Player, slot: Int, clickType: ClickType, view: InventoryView) {
         when (category) {
             TracksCategory -> {
-                TracksMenu().openMenu(player)
+                TracksMenu(true).openMenu(player)
             }
             EmotesCategory -> {
-                EmoteBoxMenu().openMenu(player)
+                EmoteBoxMenu(true).openMenu(player)
             }
             else -> {
                 CosmeticsMenu(category).openMenu(player)

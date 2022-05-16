@@ -1,8 +1,8 @@
 package gg.scala.cosmetics.thread
 
 import gg.scala.cosmetics.cosmetic.TickableCosmetic
-import gg.scala.cosmetics.profile.Profile
-import gg.scala.cosmetics.profile.ProfileHandler
+import gg.scala.cosmetics.profile.CosmeticsPlayer
+import gg.scala.cosmetics.profile.CosmeticsPlayerHandler
 import org.bukkit.Bukkit
 import org.bukkit.entity.Player
 
@@ -39,13 +39,13 @@ class CosmeticsThread : Thread("Cosmetics - Tick Thread")
         {
             lastSave = System.currentTimeMillis()
 
-            for (profile in ProfileHandler.getProfiles())
+            for (profile in CosmeticsPlayerHandler.getProfiles())
             {
                 try
                 {
                     if (profile.requiresSave)
                     {
-                        ProfileHandler.saveProfile(profile)
+                        CosmeticsPlayerHandler.saveProfile(profile)
                     }
                 } catch (e: Exception)
                 {
@@ -63,18 +63,18 @@ class CosmeticsThread : Thread("Cosmetics - Tick Thread")
                     continue
                 }
 
-                val profile = ProfileHandler.getProfile(player)
+                val profile = CosmeticsPlayerHandler.getProfile(player)
                 if (profile != null)
                 {
                     if (!gg.scala.cosmetics.CosmeticsPlugin.instance.hook.inSupportedRegion(player))
                     {
                         for (cosmetic in profile.getEnabledCosmetics())
                         {
-                            ProfileHandler.toggleCosmetic(player, cosmetic)
+                            CosmeticsPlayerHandler.toggleCosmetic(player, cosmetic)
                         }
 
-                        profile.track?.clearChanges()
-                        profile.track = null
+                        profile.track()?.clearChanges()
+                        profile.updateTrack(null)
 
                         continue
                     }
@@ -89,9 +89,9 @@ class CosmeticsThread : Thread("Cosmetics - Tick Thread")
         }
     }
 
-    private fun tickCosmetics(player: Player, profile: Profile)
+    private fun tickCosmetics(player: Player, cosmeticsPlayer: CosmeticsPlayer)
     {
-        for (cosmetic in profile.getEnabledCosmetics())
+        for (cosmetic in cosmeticsPlayer.getEnabledCosmetics())
         {
             if (cosmetic is TickableCosmetic)
             {
@@ -100,13 +100,13 @@ class CosmeticsThread : Thread("Cosmetics - Tick Thread")
         }
     }
 
-    private fun tickTrack(profile: Profile)
+    private fun tickTrack(cosmeticsPlayer: CosmeticsPlayer)
     {
-        if (profile.track != null)
+        if (cosmeticsPlayer.track() != null)
         {
             try
             {
-                profile.track!!.tick()
+                cosmeticsPlayer.track()!!.tick()
             } catch (e: Exception)
             {
                 e.printStackTrace()

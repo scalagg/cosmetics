@@ -14,23 +14,17 @@ class CosmeticsMenu(private val category: CosmeticCategory) : PaginatedMenu() {
     companion object {
         private val BUTTON_SLOTS = listOf(
             10, 11, 12, 13, 14, 15, 16,
-            19, 20, 21, 22, 23, 24, 25,
-            28, 29, 30, 31, 32, 33, 34
+            19, 20, 21, 22, 23, 24, 25
         )
     }
 
     init {
         updateAfterClick = true
+        placeholdBorders = true
     }
 
     override fun getPrePaginatedTitle(player: Player): String {
         return "Cosmetics ${Constants.DOUBLE_ARROW_RIGHT} ${ChatColor.stripColor(category.getName())}" // too lazy to go to each cosmetic and remove color lol
-    }
-
-    override fun getGlobalButtons(player: Player): Map<Int, Button> {
-        return hashMapOf<Int, Button>().also { buttons ->
-            buttons[49] = BackButton("Categories") { CategoriesMenu().openMenu(player) }
-        }
     }
 
     override fun getAllPagesButtons(player: Player): Map<Int, Button> {
@@ -48,11 +42,11 @@ class CosmeticsMenu(private val category: CosmeticCategory) : PaginatedMenu() {
     }
 
     override fun getPageButtonSlots(): Pair<Int, Int> {
-        return Pair(48, 50)
+        return Pair(0, 8)
     }
 
     override fun size(buttons: Map<Int, Button>): Int {
-        return 54
+        return 36
     }
 
     override fun onClose(player: Player, manualClose: Boolean) {

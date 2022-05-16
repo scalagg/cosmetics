@@ -5,19 +5,18 @@ import gg.scala.cosmetics.menu.CategoriesMenu
 import net.evilblock.cubed.menu.Button
 import net.evilblock.cubed.menu.Menu
 import net.evilblock.cubed.menu.buttons.BackButton
+import net.evilblock.cubed.util.bukkit.Constants
 import net.evilblock.cubed.util.bukkit.Tasks
 import org.bukkit.entity.Player
 
 class EmoteBoxMenu(private val redirect: Boolean = false) : Menu() {
 
     override fun getTitle(player: Player): String {
-        return "Emote Box"
+        return "Cosmetics ${Constants.DOUBLE_ARROW_RIGHT} Emotes"
     }
 
     override fun getButtons(player: Player): Map<Int, Button> {
         return hashMapOf<Int, Button>().also { buttons ->
-            buttons[0] = BackButton { CategoriesMenu().openMenu(player) }
-
             for ((index, emote) in EmotesBoxCosmetic.emotes.withIndex()) {
                 buttons[index] = EmoteButton(emote)
             }

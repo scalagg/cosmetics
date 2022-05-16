@@ -2,16 +2,12 @@ package gg.scala.cosmetics.command
 
 import gg.scala.cosmetics.CosmeticsPlugin
 import gg.scala.cosmetics.menu.CategoriesMenu
-import gg.scala.cosmetics.menu.CosmeticsMenu
-import gg.scala.cosmetics.profile.ProfileHandler
-import gg.scala.commons.acf.BaseCommand
 import gg.scala.commons.acf.CommandHelp
 import gg.scala.commons.acf.annotation.*
 import gg.scala.commons.annotations.commands.AutoRegister
 import gg.scala.commons.command.ScalaCommand
 import org.bukkit.ChatColor
 import org.bukkit.command.CommandSender
-import org.bukkit.command.ConsoleCommandSender
 import org.bukkit.entity.Player
 
 @AutoRegister

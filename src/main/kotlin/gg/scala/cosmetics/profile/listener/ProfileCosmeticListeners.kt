@@ -1,7 +1,7 @@
 package gg.scala.cosmetics.profile.listener
 
 import gg.scala.cosmetics.category.OutfitsCategory
-import gg.scala.cosmetics.profile.ProfileHandler
+import gg.scala.cosmetics.profile.CosmeticsPlayerHandler
 import gg.scala.commons.annotations.Listeners
 import net.evilblock.cubed.util.bukkit.ItemUtils
 import org.bukkit.entity.Player
@@ -22,7 +22,7 @@ object ProfileCosmeticListeners : Listener
     {
         if (event.slotType == InventoryType.SlotType.ARMOR)
         {
-            val profile = ProfileHandler.getProfile(event.whoClicked as Player)
+            val profile = CosmeticsPlayerHandler.getProfile(event.whoClicked as Player)
             if (profile?.getEnabledCosmetics()?.any { it.getCategory() is OutfitsCategory } == true)
             {
                 event.isCancelled = true
@@ -36,7 +36,7 @@ object ProfileCosmeticListeners : Listener
     @EventHandler
     fun onPlayerDeathEvent(event: PlayerDeathEvent)
     {
-        val profile = ProfileHandler.getProfile(event.entity)
+        val profile = CosmeticsPlayerHandler.getProfile(event.entity)
         if (profile?.getEnabledCosmetics()?.any { it.getCategory() is OutfitsCategory } == true)
         {
             val iterator = event.drops.iterator()

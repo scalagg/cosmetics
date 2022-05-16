@@ -1,6 +1,5 @@
 package gg.scala.cosmetics.category.track.player
 
-import gg.scala.cosmetics.CosmeticsPlugin
 import gg.scala.cosmetics.category.track.Track
 import org.bukkit.Bukkit
 import org.bukkit.Location

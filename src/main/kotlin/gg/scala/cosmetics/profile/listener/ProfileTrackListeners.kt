@@ -1,7 +1,7 @@
 package gg.scala.cosmetics.profile.listener
 
 import gg.scala.cosmetics.category.track.util.TrackUtil
-import gg.scala.cosmetics.profile.ProfileHandler
+import gg.scala.cosmetics.profile.CosmeticsPlayerHandler
 import gg.scala.commons.annotations.Listeners
 import org.bukkit.Material
 import org.bukkit.event.EventHandler
@@ -16,7 +16,7 @@ object ProfileTrackListeners : Listener
     @EventHandler
     fun onPlayerTeleportEvent(event: PlayerTeleportEvent)
     {
-        val track = ProfileHandler.getProfile(event.player)?.track
+        val track = CosmeticsPlayerHandler.getProfile(event.player)?.track()
         if (track != null)
         {
             if (event.to.world != event.from.world)
@@ -37,7 +37,7 @@ object ProfileTrackListeners : Listener
     {
         if (event.from.blockX != event.to.blockX || event.from.blockZ != event.to.blockZ)
         {
-            val track = ProfileHandler.getProfile(event.player)?.track
+            val track = CosmeticsPlayerHandler.getProfile(event.player)?.track()
             if (track != null)
             {
                 for (location in TrackUtil.getNewTrail(event.to.clone().add(0.0, -1.0, 0.0), false, track.track.radius))
@@ -54,6 +54,6 @@ object ProfileTrackListeners : Listener
     @EventHandler
     fun onPlayerQuitEvent(event: PlayerQuitEvent)
     {
-        ProfileHandler.getProfile(event.player)?.track?.clearChanges()
+        CosmeticsPlayerHandler.getProfile(event.player)?.track()?.clearChanges()
     }
 }

@@ -1,7 +1,7 @@
 package gg.scala.cosmetics.category.effect.wings
 
 import gg.scala.cosmetics.cosmetic.TickableCosmetic
-import gg.scala.cosmetics.profile.ProfileHandler
+import gg.scala.cosmetics.profile.CosmeticsPlayerHandler
 import net.evilblock.cubed.util.nms.MinecraftReflection
 import net.evilblock.cubed.util.nms.particle.ParticleMeta
 import net.evilblock.cubed.util.nms.particle.ParticleUtil
@@ -26,7 +26,7 @@ abstract class WingsEffect(
             return
         }
 
-        val profile = ProfileHandler.getProfile(player) ?: return
+        val profile = CosmeticsPlayerHandler.getProfile(player) ?: return
         if (System.currentTimeMillis() - profile.lastMovement < 500L) {
             return
         }
