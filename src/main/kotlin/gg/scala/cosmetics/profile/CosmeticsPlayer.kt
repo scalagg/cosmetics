@@ -4,6 +4,7 @@ import gg.scala.cosmetics.CosmeticsPlugin
 import gg.scala.cosmetics.category.track.TrackHandler
 import gg.scala.cosmetics.category.track.player.PlayerTrack
 import gg.scala.cosmetics.cosmetic.Cosmetic
+import gg.scala.store.controller.annotations.Timestamp
 import gg.scala.store.storage.storable.IDataStoreObject
 import org.bukkit.Bukkit
 import java.util.*
@@ -17,6 +18,9 @@ class CosmeticsPlayer(
         mutableMapOf<String, Boolean>()
 
     private var track: String? = null
+
+    @Timestamp
+    var timestamp = 0L
 
     fun updateTrack(
         track: PlayerTrack?

@@ -40,14 +40,12 @@ object CosmeticsPlayerHandler
     fun loadProfile(uuid: UUID)
     {
         this.cosmeticsPlayerLayer
-            .load(uuid, DataStoreStorageType.MONGO)
+            .loadOptimalCopy(uuid) {
+                CosmeticsPlayer(uuid)
+            }
             .exceptionally {
                 it.printStackTrace()
                 return@exceptionally null
-            }
-            .thenAccept {
-                this.cosmeticsPlayerLayer
-                    .localCache()[uuid] = it ?: CosmeticsPlayer(uuid)
             }
     }
 
