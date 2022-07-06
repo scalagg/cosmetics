@@ -42,7 +42,7 @@ class CategoriesMenu : Menu() {
 
     private inner class InfoButton : Button() {
         override fun getName(player: Player): String {
-            return "${CC.D_AQUA}Your Cosmetics"
+            return "${CC.YELLOW}Your Cosmetics"
         }
 
         override fun getDescription(player: Player): List<String> {
@@ -59,11 +59,11 @@ class CategoriesMenu : Menu() {
                 })
 
                 desc.add("")
-                desc.add("${CC.WHITE}Collect cool and crazy")
-                desc.add("${CC.WHITE}cosmetics to show off in")
-                desc.add("${CC.WHITE}lobbies by winning games,")
-                desc.add("${CC.WHITE}unlocking achievements,")
-                desc.add("${CC.WHITE}and opening crates!")
+                desc.add("${CC.GRAY}Collect cool and crazy")
+                desc.add("${CC.GRAY}cosmetics to show off!")
+                desc.add("")
+                desc.add("${CC.GRAY}Click one of the following")
+                desc.add("${CC.GRAY}categories to view cosmetics.")
             }
         }
 

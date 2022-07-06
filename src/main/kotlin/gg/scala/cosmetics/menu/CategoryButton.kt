@@ -19,7 +19,7 @@ import org.bukkit.inventory.ItemStack
 class CategoryButton(private val category: CosmeticCategory) : Button() {
 
     override fun getName(player: Player): String {
-        return "${CC.B_PRI}${category.getName()}"
+        return "${CC.YELLOW}${category.getName()}"
     }
 
     override fun getDescription(player: Player): List<String> {
@@ -32,12 +32,12 @@ class CategoryButton(private val category: CosmeticCategory) : Button() {
 
             lore.add(buildString {
                 append("${ChatColor.GRAY}Unlocked: ")
-                append("${ChatColor.GREEN}${Numbers.format(unlocked)}")
-                append("${ChatColor.GRAY}/${CC.GREEN}${Numbers.format(total)}")
+                append("${ChatColor.WHITE}${Numbers.format(unlocked)}")
+                append("${ChatColor.WHITE}/${CC.WHITE}${Numbers.format(total)}")
             })
 
             lore.add("")
-            lore.add("${ChatColor.GREEN }Click to browse.")
+            lore.add("${ChatColor.GREEN}Click to browse!")
         }
     }
 

@@ -33,22 +33,27 @@ class CosmeticsPlayer(
     @Transient
     var transientPlayerTrack: PlayerTrack? = null
 
-    fun track() = if (this.track == null)
+    fun track(): PlayerTrack?
     {
-        null
-    } else if (transientPlayerTrack == null && this.track != null)
-    {
-        this.transientPlayerTrack =
-            PlayerTrack(
-                TrackHandler.getTrackById(this.track!!)!!
-            ).apply {
-                this.cachedPlayer =
-                    Bukkit.getPlayer(uuid)
-            }
-        this.transientPlayerTrack
-    } else
-    {
-        this.transientPlayerTrack
+        if (this.track == null)
+        {
+            return null
+        }
+
+        if (transientPlayerTrack == null && this.track != null)
+        {
+            val trackId = TrackHandler
+                .getTrackById(this.track!!)
+                ?: return null
+
+            this.transientPlayerTrack =
+                PlayerTrack(trackId).apply {
+                    this.cachedPlayer =
+                        Bukkit.getPlayer(uuid)
+                }
+        }
+
+        return this.transientPlayerTrack
     }
 
     @Transient
