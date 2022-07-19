@@ -7,9 +7,9 @@ import net.evilblock.cubed.util.CC
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 
+@CosmeticCategoryAR
 object TracksCategory : CosmeticCategory
 {
-
     override fun getName(): String {
         return "Tracks"
     }

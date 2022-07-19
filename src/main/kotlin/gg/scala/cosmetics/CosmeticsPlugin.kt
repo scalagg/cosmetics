@@ -7,7 +7,10 @@ import gg.scala.cosmetics.menu.CategoriesMenu
 import gg.scala.cosmetics.thread.CosmeticsThread
 import gg.scala.commons.ExtendedScalaPlugin
 import gg.scala.commons.annotations.container.ContainerEnable
+import gg.scala.commons.annotations.custom.CustomAnnotationProcessors
 import gg.scala.commons.config.annotations.ContainerConfig
+import gg.scala.cosmetics.cosmetic.category.CosmeticCategory
+import gg.scala.cosmetics.hook.CosmeticHook
 import me.lucko.helper.Events
 import me.lucko.helper.plugin.ap.Plugin
 import me.lucko.helper.plugin.ap.PluginDependency
@@ -34,16 +37,9 @@ class CosmeticsPlugin : ExtendedScalaPlugin()
         lateinit var instance: CosmeticsPlugin
     }
 
-    var hook = DefaultCosmeticHook
+    lateinit var hook: CosmeticHook
 
-    val categories = arrayListOf(
-        OutfitsCategory,
-        PetsCategory,
-        EffectsCategory,
-        EmotesCategory,
-        TracksCategory
-    )
-
+    val categories = mutableListOf<CosmeticCategory>()
     val cosmetics = mutableMapOf<String, Cosmetic>()
 
     @ContainerEnable
@@ -51,16 +47,15 @@ class CosmeticsPlugin : ExtendedScalaPlugin()
     {
         instance = this
 
-        Events.subscribe(PlayerInteractEvent::class.java)
-            .filter {
-                it.item != null &&
-                        it.action.name.contains("RIGHT") &&
-                        it.item.hasItemMeta() &&
-                        it.item.itemMeta.displayName.contains("Cosmetics")
+        CustomAnnotationProcessors
+            .process<CosmeticCategoryAR> {
+                if (it is CosmeticCategory)
+                {
+                    this.categories.add(it)
+                }
             }
-            .handler {
-                CategoriesMenu().openMenu(it.player)
-            }
+
+        this.hook = this.contract<CosmeticHook>()!!
 
         for (category in categories)
         {
