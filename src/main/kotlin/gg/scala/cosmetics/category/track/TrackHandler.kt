@@ -4,6 +4,8 @@ import gg.scala.flavor.service.Configure
 import gg.scala.flavor.service.Service
 import gg.scala.store.controller.DataStoreObjectControllerCache
 import gg.scala.store.storage.type.DataStoreStorageType
+import java.util.*
+import java.util.concurrent.CompletableFuture
 
 @Service
 object TrackHandler
@@ -27,11 +29,13 @@ object TrackHandler
             }
     }
 
-    fun saveData()
+    fun saveData(): CompletableFuture<Void>
     {
-        this.tracks.forEach { (_, u) ->
-            DataStoreObjectControllerCache
-                .findNotNull<Track>().save(u)
+        return CompletableFuture.runAsync {
+            this.tracks.forEach { (_, u) ->
+                DataStoreObjectControllerCache
+                    .findNotNull<Track>().save(u)
+            }
         }
     }
 
@@ -42,16 +46,16 @@ object TrackHandler
 
     fun getTrackById(id: String): Track?
     {
-        return tracks[id.toLowerCase()]
+        return tracks[id.lowercase(Locale.getDefault())]
     }
 
     fun trackTrack(track: Track)
     {
-        tracks[track.getRawID().toLowerCase()] = track
+        tracks[track.getRawID().lowercase(Locale.getDefault())] = track
     }
 
     fun forgetTrack(track: Track)
     {
-        tracks.remove(track.getRawID().toLowerCase())
+        tracks.remove(track.getRawID().lowercase(Locale.getDefault()))
     }
 }
