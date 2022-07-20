@@ -9,7 +9,6 @@ import net.evilblock.cubed.util.bukkit.ItemBuilder
 import org.bukkit.Material
 import org.bukkit.inventory.ItemStack
 
-@CosmeticCategoryAR
 object OutfitsCategory : CosmeticCategory
 {
     private val cosmetics = listOf<Cosmetic>(

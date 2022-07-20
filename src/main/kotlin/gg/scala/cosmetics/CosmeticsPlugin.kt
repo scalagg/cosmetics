@@ -47,12 +47,11 @@ class CosmeticsPlugin : ExtendedScalaPlugin()
     {
         instance = this
 
-        CustomAnnotationProcessors
-            .process<CosmeticCategoryAR> {
-                if (it is CosmeticCategory)
-                {
-                    this.categories.add(it)
-                }
+        this.packageIndexer
+            .getSubTypes<CosmeticCategory>()
+            .mapNotNull { it.objectInstance() }
+            .forEach {
+                this.categories.add(it as CosmeticCategory)
             }
 
         this.hook = this.contract<CosmeticHook>()!!
