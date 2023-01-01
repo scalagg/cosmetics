@@ -42,7 +42,7 @@ class CategoriesMenu : Menu() {
 
     private inner class InfoButton : Button() {
         override fun getName(player: Player): String {
-            return "${CC.YELLOW}Your Cosmetics"
+            return "${CC.PRI}Your Cosmetics"
         }
 
         override fun getDescription(player: Player): List<String> {
@@ -53,17 +53,14 @@ class CategoriesMenu : Menu() {
                 val total = CosmeticsPlugin.instance.getCosmetics().size
 
                 desc.add(buildString {
-                    append("${ChatColor.GRAY}Collected: ")
+                    append("${ChatColor.WHITE}Collected: ")
                     append("${ChatColor.GREEN}${Numbers.format(collected)}")
-                    append("${ChatColor.GRAY}/${CC.WHITE}${Numbers.format(total)}")
+                    append("${ChatColor.GREEN}/${CC.GREEN}${Numbers.format(total)}")
                 })
 
                 desc.add("")
                 desc.add("${CC.GRAY}Collect cool and crazy")
                 desc.add("${CC.GRAY}cosmetics to show off!")
-                desc.add("")
-                desc.add("${CC.GRAY}Click one of the following")
-                desc.add("${CC.GRAY}categories to view cosmetics.")
             }
         }
 

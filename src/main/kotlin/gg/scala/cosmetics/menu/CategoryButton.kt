@@ -19,7 +19,7 @@ import org.bukkit.inventory.ItemStack
 class CategoryButton(private val category: CosmeticCategory) : Button() {
 
     override fun getName(player: Player): String {
-        return "${CC.YELLOW}${category.getName()}"
+        return "${CC.PRI}${category.getName()}"
     }
 
     override fun getDescription(player: Player): List<String> {

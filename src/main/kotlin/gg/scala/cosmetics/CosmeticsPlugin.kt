@@ -1,21 +1,15 @@
 package gg.scala.cosmetics
 
-import gg.scala.cosmetics.category.*
-import gg.scala.cosmetics.cosmetic.Cosmetic
-import gg.scala.cosmetics.hook.DefaultCosmeticHook
-import gg.scala.cosmetics.menu.CategoriesMenu
-import gg.scala.cosmetics.thread.CosmeticsThread
 import gg.scala.commons.ExtendedScalaPlugin
 import gg.scala.commons.annotations.container.ContainerEnable
-import gg.scala.commons.annotations.custom.CustomAnnotationProcessors
 import gg.scala.commons.config.annotations.ContainerConfig
+import gg.scala.cosmetics.cosmetic.Cosmetic
 import gg.scala.cosmetics.cosmetic.category.CosmeticCategory
 import gg.scala.cosmetics.hook.CosmeticHook
-import me.lucko.helper.Events
+import gg.scala.cosmetics.thread.CosmeticsThread
 import me.lucko.helper.plugin.ap.Plugin
 import me.lucko.helper.plugin.ap.PluginDependency
 import org.bukkit.event.Listener
-import org.bukkit.event.player.PlayerInteractEvent
 
 @Plugin(
     name = "Cosmetics",

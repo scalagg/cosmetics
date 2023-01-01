@@ -46,7 +46,6 @@ object CosmeticsCommand : ScalaCommand()
     }
 
     @Subcommand("menu")
-    @CommandPermission("op")
     @Description("Opens the main cosmetics menu.")
     fun onCosmeticsMenu(player: Player)
     {
