@@ -29,7 +29,7 @@ abstract class RingsEffect(private val particle: Any) : TickableCosmetic(), List
         val angle = ticks * ((2 * Math.PI) / 32)
         val location = player.location.clone().add(0.6 * cos(angle), y, 0.6 * sin(angle))
 
-        ParticleUtil.sendsParticleToAll(location.world,
+        ParticleUtil.sendsParticleToAllRespectingVisibility(location.world, player,
             ParticleMeta(location, particle, 0F, 0F, 0F, 0F, 2)
         )
     }
@@ -38,7 +38,7 @@ abstract class RingsEffect(private val particle: Any) : TickableCosmetic(), List
         val angle = ticks * ((2 * Math.PI) / 32)
         val location = player.location.clone().add(0.8 * cos(angle), y, 0.8 * sin(angle))
 
-        ParticleUtil.sendsParticleToAll(location.world,
+        ParticleUtil.sendsParticleToAllRespectingVisibility(location.world, player,
             ParticleMeta(location, particle, 0F, 0F, 0F, 0F, 2)
         )
     }

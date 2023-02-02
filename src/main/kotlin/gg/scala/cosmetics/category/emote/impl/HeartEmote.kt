@@ -7,6 +7,7 @@ import net.evilblock.cubed.util.nms.particle.ParticleUtil
 import org.bukkit.ChatColor
 import org.bukkit.Location
 import org.bukkit.Material
+import org.bukkit.entity.Player
 import org.bukkit.inventory.ItemStack
 
 object HeartEmote : Emote {
@@ -27,8 +28,8 @@ object HeartEmote : Emote {
         return ItemStack(Material.RED_ROSE)
     }
 
-    override fun playEffect(location: Location) {
-        ParticleUtil.sendsParticleToAll(location.world,
+    override fun playEffect(location: Location, player: Player) {
+        ParticleUtil.sendsParticleToAllRespectingVisibility(location.world, player,
             ParticleMeta(location, MinecraftReflection.getEnumParticle("HEART")!!)
         )
     }

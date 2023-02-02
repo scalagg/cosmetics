@@ -33,7 +33,7 @@ abstract class WingsEffect(
 
         lastTick = System.currentTimeMillis()
 
-        ParticleUtil.sendsParticleToAll(player.world, *(generateParticles(player)).toTypedArray())
+        ParticleUtil.sendsParticleToAllRespectingVisibility(player.world, player, *(generateParticles(player)).toTypedArray())
     }
 
     private fun generateParticles(player: Player): List<ParticleMeta> {

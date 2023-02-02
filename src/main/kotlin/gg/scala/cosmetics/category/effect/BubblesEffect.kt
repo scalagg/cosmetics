@@ -48,7 +48,7 @@ object BubblesEffect : TickableCosmetic(), Listener {
         location.y = ThreadLocalRandom.current().nextDouble(location.y, player.eyeLocation.y)
         location.z = ThreadLocalRandom.current().nextDouble(location.z - 0.33, location.z + 0.33)
 
-        ParticleUtil.sendsParticleToAll(location.world,
+        ParticleUtil.sendsParticleToAllRespectingVisibility(location.world, player,
             ParticleMeta(
                 location,
                 MinecraftReflection.getEnumParticle("SPELL_MOB_AMBIENT")!!,

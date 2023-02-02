@@ -33,7 +33,7 @@ class EmoteButton(private val emote: Emote) : Button() {
 
     override fun clicked(player: Player, slot: Int, clickType: ClickType, view: InventoryView) {
         player.closeInventory()
-        emote.playEffect(player.eyeLocation.clone().add(player.location.direction))
+        emote.playEffect(player.eyeLocation.clone().add(player.location.direction), player)
     }
 
 }

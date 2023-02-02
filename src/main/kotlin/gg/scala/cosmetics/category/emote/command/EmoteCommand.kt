@@ -22,6 +22,6 @@ object EmoteCommand : ScalaCommand()
     @Description("Open the Emotes GUI.")
     fun perform(player: Player, emote: Emote)
     {
-        emote.playEffect(player.eyeLocation.clone().add(player.location.direction))
+        emote.playEffect(player.eyeLocation.clone().add(player.location.direction), player)
     }
 }
